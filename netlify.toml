@@ -1,0 +1,10 @@
+# Netlify: ingen byggesteg, siden publiseres rett fra rotmappen.
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
