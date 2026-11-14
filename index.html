@@ -291,6 +291,12 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
 .legend .ln{display:inline-block;width:16px;height:0;border-top:2px solid;margin-inline-end:6px;vertical-align:3px}
 .legend .cap{margin-inline-start:auto;color:var(--ink-3)}
 .chart .lnp{fill:none;stroke-width:2}
+.vd{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.vd>summary{cursor:pointer;padding:12px 14px;list-style:none}.vd>summary::-webkit-details-marker{display:none}
+.vd>summary::before{content:"▸";display:inline-block;margin-inline-end:8px;color:var(--ink-3);transition:transform .15s}[dir="rtl"] .vd>summary::before{content:"◂"}
+.vd[open]>summary::before{transform:rotate(90deg)}[dir="rtl"] .vd[open]>summary::before{transform:rotate(-90deg)}
+.vd>summary{display:flex;align-items:center}
+.vd-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px;padding:4px 16px 16px;border-top:1px solid var(--line-2)}
 @media (max-width:1180px){.ledger{grid-template-columns:repeat(3,minmax(0,1fr))}.ledger .cell:nth-child(4n){border-inline-end:1px solid var(--line-2)}.ledger .cell:nth-child(3n){border-inline-end:0}}
 @media (max-width:960px){
   .app{grid-template-columns:1fr}
@@ -311,7 +317,7 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
   .ledger .cell:nth-child(2n){border-inline-end:0}
   .ledger .v{font-size:18px}
   .ledger .cell{padding:13px 14px}
-  .scn,.rk,.rt-grid,.groups{grid-template-columns:1fr}
+  .scn,.rk,.rt-grid,.groups,.vd-grid{grid-template-columns:1fr}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .kpi{padding:13px 14px}.kpi .v{font-size:21px;white-space:normal}
   .kpi .m small{display:none}
@@ -384,7 +390,7 @@ fixedOverhead:['مبلغ ماهانه','Monthly amount'],
 dieselNote:[(p)=>`بودجه گازوئیل بر اساس قیمت مرجع ۰٫۲۵۸ تنظیم شده و با قیمت فعلی (${p}) تعدیل می‌شود. هزینه‌های متغیر در دوره راه‌اندازی متناسب با بهره‌وری کاهش می‌یابند.`,(p)=>`The diesel budget is set at a 0.258 reference price and scales with the current price (${p}). Variable costs scale with utilization during ramp-up.`],
 sec_inv:['سرمایه‌گذاری اولیه','Initial investment'],invTrucks:['کامیون‌ها و تریلرها','Trucks and trailers'],kind_truck:['به ازای کامیون','Per truck'],kind_fixed:['مبلغ ثابت','Fixed amount'],kind_calc:['از جدول ناوگان','From fleet table'],col_amount:['مبلغ','Amount'],col_value:['مقدار','Value'],addInv:['افزودن ردیف سرمایه‌گذاری','Add investment line'],newInv:['ردیف جدید','New line'],
 sec_fin:['مفروضات مالی','Financial assumptions'],
-f_diesel:['قیمت گازوئیل (هر لیتر)','Diesel price (per litre)'],f_revG:['رشد سالانه درآمد ٪','Annual revenue growth %'],f_costG:['رشد سالانه هزینه‌ها ٪','Annual cost growth %'],f_tax:['مالیات بر درآمد شرکت ٪','Corporate income tax %'],f_lossCF:['انتقال زیان به سال‌های بعد','Carry tax losses forward'],f_life:['عمر اقتصادی کامیون (سال)','Truck economic life (years)'],f_resid:['ارزش باقیمانده ٪','Residual value %'],f_mcapex:['هزینه سرمایه‌ای نگهداری سالانه','Annual maintenance capex'],f_disc:['نرخ تنزیل ٪','Discount rate %'],f_start:['سال شروع','Start year'],f_dist:['سهم تقسیم سود از جریان نقد آزاد ٪','Distribution share of free cash flow %'],f_mult:['ضریب EBITDA','EBITDA multiple'],
+f_diesel:['قیمت گازوئیل (هر لیتر)','Diesel price (per litre)'],f_revG:['رشد سالانه درآمد ٪','Annual revenue growth %'],f_costG:['رشد سالانه هزینه‌ها ٪','Annual cost growth %'],f_tax:['مالیات بر درآمد شرکت ٪','Corporate income tax %'],f_lossCF:['انتقال زیان به سال‌های بعد','Carry tax losses forward'],f_life:['عمر پیش‌فرض کامیون‌های جدید (سال)','Default life for new vehicle types (years)'],f_resid:['ارزش باقیمانده پیش‌فرض ٪','Default residual value %'],f_mcapex:['هزینه سرمایه‌ای نگهداری سالانه','Annual maintenance capex'],f_disc:['نرخ تنزیل ٪','Discount rate %'],f_start:['سال شروع','Start year'],f_dist:['سهم تقسیم سود از جریان نقد آزاد ٪','Distribution share of free cash flow %'],f_mult:['ضریب EBITDA','EBITDA multiple'],
 sec_ramp:['دوره راه‌اندازی','Ramp-up'],f_ramp:['اعمال دوره راه‌اندازی در سال اول','Apply ramp-up in year 1'],f_r1:['بهره‌وری ماه ۱ تا ۳ ٪','Utilization months 1–3 %'],f_r2:['بهره‌وری ماه ۴ تا ۶ ٪','Utilization months 4–6 %'],rampNote:['از ماه هفتم، ناوگان با ظرفیت کامل برنامه کار می‌کند. درآمد و هزینه‌های متغیر با بهره‌وری کم می‌شوند؛ حقوق، بیمه و هزینه‌های اداری از روز اول پرداخت می‌شوند.','From month 7 the fleet runs at full planned capacity. Revenue and variable costs scale with utilization; salaries, insurance and admin are paid from day one.'],
 t_title:['محاسبه‌گر سودآوری سفر','Trip profitability calculator'],t_sub:['هزینه‌های وابسته به کیلومتر بر اساس کل مسافت، شامل برگشت خالی، محاسبه می‌شوند.','Kilometre-based costs use the total distance, including the empty return.'],
 t_route:['مسیر','Route'],t_name:['نام مسیر','Route name'],t_pricing:['روش قیمت‌گذاری','Pricing method'],pm_trip:['هر سفر','Per trip'],pm_km:['هر کیلومتر','Per km'],pm_ton:['هر تن','Per ton'],
@@ -441,6 +447,18 @@ st_open:['باز','Open'],st_mitig:['در حال کاهش','Mitigating'],st_clos
 sh_rev:['نرخ کرایه، همه انواع','Freight rates, all'],sh_revCat:['درآمد یک نوع حمل','Revenue of one category'],sh_util:['بهره‌وری ناوگان','Fleet utilization'],sh_diesel:['قیمت گازوئیل','Diesel price'],sh_drivers:['هزینه رانندگان','Driver costs'],sh_opex:['همه هزینه‌های عملیاتی','All operating costs'],sh_capex:['قیمت خرید کامیون','Truck purchase price'],
 sh_pct:['تغییر ٪','Change %'],
 p1:['بسیار کم (۱۰٪)','Very low (10%)'],
+ton:['تن','t'],cat_details:['جزئیات خودروها','Vehicle details'],cat_detailsSub:['خرید، ارز، حمل و گمرک، عمر و استهلاک، و وزن هر نوع خودرو. برای باز کردن روی هر ردیف کلیک کنید.','Purchase, currency, shipping and customs, life and depreciation, and weight for each vehicle type. Click a row to open it.'],
+cd_buy:['خرید','Purchase'],cd_cond:['وضعیت','Condition'],cond_new:['نو','New'],cond_used:['کارکرده','Used'],cd_age:['سن خودرو (سال)','Vehicle age (years)'],cd_cur:['ارز خرید','Purchase currency'],
+cd_price:['قیمت کشنده (به ارز خرید)','Tractor price (purchase currency)'],cd_trailer:['قیمت تریلر (به ارز خرید)','Trailer price (purchase currency)'],cd_ship:['حمل تا عمان (ریال، هر دستگاه)','Shipping to Oman (OMR per unit)'],cd_duty:['گمرک ٪','Customs duty %'],cd_reg:['ثبت و پلاک (ریال، هر دستگاه)','Registration (OMR per unit)'],
+cd_life:['عمر و استهلاک','Life and depreciation'],cd_tLife:['عمر باقیمانده کشنده (سال)','Remaining tractor life (years)'],cd_tResid:['ارزش باقیمانده کشنده ٪','Tractor residual value %'],cd_trLife:['عمر تریلر (سال)','Trailer life (years)'],cd_trResid:['ارزش باقیمانده تریلر ٪','Trailer residual value %'],cd_maint:['هزینه نگهداری اضافه ٪','Extra maintenance %'],cd_maintHint:['مثلاً ۲۵٪ برای خودروی کارکرده','e.g. 25% for a used vehicle'],
+cd_weight:['وزن','Weight'],cd_tare:['وزن خالی کشنده و تریلر (تن)','Empty weight, tractor + trailer (t)'],cd_legal:['حداکثر وزن کل مجاز در جاده عمومی (تن)','Max legal gross weight on public roads (t)'],cd_legalHint:['۰ یعنی تعیین نشده؛ با پلیس عمان تأیید کنید','0 = not set; confirm with Royal Oman Police'],
+cd_cif:['خرید و حمل','Purchase and shipping'],cd_dutyAmt:['گمرک','Customs'],cd_regAmt:['ثبت','Registration'],cd_landed:['قیمت تمام‌شده هر دستگاه','Landed cost per unit'],cd_fleetCost:['برای کل این دسته','For this whole category'],cd_depY:['استهلاک سال اول هر دستگاه','First-year depreciation per unit'],cd_payload:['حداکثر بار قانونی','Max legal payload'],
+col_landed:['قیمت تمام‌شده هر دستگاه','Landed cost per unit'],col_cond:['وضعیت','Condition'],
+f_fxEUR:['نرخ یورو (ریال عمان برای هر یورو)','EUR rate (OMR per EUR)'],f_fxUSD:['نرخ دلار (ریال عمان برای هر دلار)','USD rate (OMR per USD)'],
+rt_consL:['مصرف سوخت با بار (لیتر در ۱۰۰ کیلومتر)','Fuel use loaded (L per 100 km)'],rt_consE:['مصرف سوخت خالی (لیتر در ۱۰۰ کیلومتر)','Fuel use empty (L per 100 km)'],rt_public:['مسیر از جاده عمومی می‌گذرد','Route uses public roads'],rt_gross:['وزن کل با بار','Gross weight loaded'],
+w_rtOverW:[(g,l)=>`وزن کل ${g} تن از حد مجاز جاده عمومی (${l} تن) بیشتر است: خطر جریمه و توقف.`,(g,l)=>`Gross weight ${g} t exceeds the public-road limit (${l} t): risk of fines and stops.`],
+rt_privOk:[(g,l)=>`وزن کل ${g} تن فقط در جاده اختصاصی معدن مجاز است؛ حد جاده عمومی ${l} تن است.`,(g,l)=>`${g} t gross is only allowed on the private haul road; the public-road limit is ${l} t.`],
+lg_flagW:[(g,l)=>`وزن کل ${g} تن، بیش از حد ${l} تن`,(g,l)=>`${g} t gross, over the ${l} t limit`],
 grp_inv:['سرمایه‌گذاری و بازده','Investment and return'],grp_ops:['عملیات ماهانه','Monthly operations'],grp_risk:['ریسک و کیفیت داده','Risk and data quality'],
 allFc:['همه ارقام پیش‌بینی هستند، به ریال عمان','All figures are forecasts, in OMR'],axisK:['هزار ریال عمان','OMR thousands'],
 k_revTruck:['درآمد هر کامیون در ماه','Revenue per truck per month'],k_ebitdaTruck:['EBITDA هر کامیون در ماه','EBITDA per truck per month'],k_drvCov:['پوشش رانندگان','Driver coverage'],k_invTruck:['سرمایه‌گذاری هر کامیون','Investment per truck'],
@@ -576,13 +594,26 @@ function baseModel(){return{
 function blankModel(){const m=baseModel();m.cats=[];m.opex.forEach(o=>{o.v=0;o.src='guess'});m.fixed.forEach(o=>{o.v=0;o.src='guess'});m.inv.forEach(i=>{i.v=0;i.src='guess'});
  m.investors=[];m.risks=[];m.routes=[];m.drv.cost=0;Object.assign(m.fin,{revG:0,costG:0,mcapex:0,ramp:false});
  Object.assign(m.trip,{name:T('rt_newName'),pTrip:0,pKm:0,pTon:0,tons:0,loaded:0,empty:0,other:0,bonus:0});m.meta={'fin.diesel':{src:'quote'},'fin.tax':{src:'ver'},drv:{src:'guess'}};return m}
-function normModel(m){if(!m)return m;m.drv=Object.assign({mode:'ratio',ratio:1,count:30,shifts:1,truckDays:26,driverDays:22,absence:8,cost:400},m.drv||{});m.routes=m.routes||[];m.fin=m.fin||{};if(!m.fin.revSource)m.fin.revSource='topdown';return m}
-function calcRoute(rt,f){const km=(+rt.loaded||0)+(+rt.empty||0),roundH=(rt.speed>0?km/rt.speed:0)+(+rt.load||0)+(+rt.unload||0)+(+rt.wait||0);
+function normModel(m){if(!m)return m;m.fin=m.fin||{};const F0=m.fin;if(F0.fxEUR==null)F0.fxEUR=0.42;if(F0.fxUSD==null)F0.fxUSD=0.3845;
+ m.meta=m.meta||{};if(!m.meta['fin.fxEUR'])m.meta['fin.fxEUR']={src:'guess'};if(!m.meta['fin.fxUSD'])m.meta['fin.fxUSD']={src:'ver'};
+ (m.cats||[]).forEach(c=>{const d={cur:'OMR',trailer:0,ship:0,duty:0,reg:0,cond:'new',age:0,life:F0.life||7,resid:F0.resid==null?20:F0.resid,trLife:F0.life||7,trResid:F0.resid==null?20:F0.resid,maintPct:0,tare:0,legal:0};for(const k in d)if(c[k]==null)c[k]=d[k]});
+ (m.routes||[]).forEach(r=>{if(r.consL==null)r.consL=r.cons==null?40:r.cons;if(r.consE==null)r.consE=r.cons==null?30:r.cons;if(r.publicRoad==null)r.publicRoad=true});
+ m.drv=Object.assign({mode:'ratio',ratio:1,count:30,shifts:1,truckDays:26,driverDays:22,absence:8,cost:400},m.drv||{});m.routes=m.routes||[];if(!m.fin.revSource)m.fin.revSource='topdown';return m}
+const fxOf=(c,f)=>c.cur==='EUR'?+f.fxEUR||0:c.cur==='USD'?+f.fxUSD||0:1;
+function landed(c,f){const fx=fxOf(c,f),tr=(+c.price||0)*fx,tl=(+c.trailer||0)*fx,cif=tr+tl+(+c.ship||0),duty=cif*(+c.duty||0)/100,total=cif+duty+(+c.reg||0),sh=tr+tl>0?tr/(tr+tl):1;
+ return{cif,duty,reg:+c.reg||0,total,tractorBase:total*sh,trailerBase:total*(1-sh)}}
+function depOf(c,f,y,impPer){const L1=landed(c,f),q=+c.qty||0;const a=(base,life,res)=>life>0&&y<life?base*(1-(+res||0)/100)/life:0;
+ return q*(a(L1.tractorBase+impPer,+c.life,c.resid)+a(L1.trailerBase,+c.trLife,c.trResid))}
+function bookOf(c,f,impPer){const L1=landed(c,f),q=+c.qty||0;const b=(base,life,res)=>{if(!(life>0))return base;const an=base*(1-(+res||0)/100)/life;return Math.max(0,base-an*Math.min(5,life))};
+ return q*(b(L1.tractorBase+impPer,+c.life,c.resid)+b(L1.trailerBase,+c.trLife,c.trResid))}
+function calcRoute(rt,f,cat){const km=(+rt.loaded||0)+(+rt.empty||0),roundH=(rt.speed>0?km/rt.speed:0)+(+rt.load||0)+(+rt.unload||0)+(+rt.wait||0);
  const maxR=roundH>0?(+rt.maxH||0)/roundH:0;
  const rev=rt.pricing==='ton'?rt.priceTon*rt.tons:rt.pricing==='km'?rt.priceKm*rt.loaded:+rt.priceRound||0;
- const liters=km*(+rt.cons||0)/100,fuel=liters*f.diesel,mt=km*(+rt.mt||0),cost=fuel+mt+(+rt.fee||0)+(+rt.bonus||0),cont=rev-cost;
+ const cL=rt.consL==null?+rt.cons||0:+rt.consL,cE=rt.consE==null?+rt.cons||0:+rt.consE;
+ const liters=(+rt.loaded||0)*cL/100+(+rt.empty||0)*cE/100,fuel=liters*f.diesel,mt=km*(+rt.mt||0)*(1+(cat?+cat.maintPct||0:0)/100),cost=fuel+mt+(+rt.fee||0)+(+rt.bonus||0),cont=rev-cost;
+ const gross=cat?(+cat.tare||0)+(+rt.tons||0):0,legal=cat?+cat.legal||0:0,overW=legal>0&&gross>legal;
  const rm=(+rt.trucks||0)*(+rt.roundsDay||0)*(+rt.days||0);
- return{km,roundH,maxR,maxInt:Math.floor(maxR+1e-9),rev,liters,fuel,mt,cost,cont,rm,kmM:km*rm,revM:rev*rm,costM:cost*rm,contM:cont*rm,hoursDay:roundH*(+rt.roundsDay||0),use:rt.maxH>0?roundH*(+rt.roundsDay||0)/rt.maxH:0}}
+ return{km,roundH,maxR,maxInt:Math.floor(maxR+1e-9),rev,liters,fuel,mt,cost,cont,rm,kmM:km*rm,revM:rev*rm,costM:cost*rm,contM:cont*rm,gross,legal,overW,hoursDay:roundH*(+rt.roundsDay||0),use:rt.maxH>0?roundH*(+rt.roundsDay||0)/rt.maxH:0}}
 function drvCalc(m,qty){const d=m.drv,abs=Math.min(.9,Math.max(0,(+d.absence||0)/100)),need=qty*Math.max(1,+d.shifts||1),td=+d.truckDays||0,dd=Math.max(1,+d.driverDays||1);
  const rec=Math.max(0,Math.ceil(need*td/dd/(1-abs)-1e-9));
  const drivers=d.mode==='auto'?rec:d.mode==='manual'?Math.max(0,Math.round(+d.count||0)):Math.max(0,Math.ceil(qty*(+d.ratio||0)-1e-9));
@@ -595,36 +626,38 @@ function calc(m){
  const f=m.fin,u=m._util||1;
  const qty=sum(m.cats,c=>+c.qty||0);
  const useRoutes=f.revSource==='routes'&&m.routes.length>0;
- const rts=m.routes.map(rt=>({rt,x:calcRoute(rt,f)}));
+ const rts=m.routes.map(rt=>({rt,x:calcRoute(rt,f,m.cats.find(c=>c.id===rt.cat))}));
  const revCat=useRoutes?m.cats.map(c=>({id:c.id,label:L(c),v:sum(rts.filter(o=>o.rt.cat===c.id),o=>o.x.revM)})):m.cats.map(c=>({id:c.id,label:L(c),v:(+c.qty||0)*(+c.rev||0)}));
  const revM=sum(revCat,x=>x.v);
  const dF=f.dieselRef?f.diesel/f.dieselRef:1;
  const DV=drvCalc(m,qty),drivers=DV.drivers;
  const lines=[];
- m.opex.forEach(o=>{if(useRoutes&&o.var)return;lines.push({id:o.id,label:L(o),v:o.v*qty*(o.id==='diesel'?dF:1),var:!!o.var})});
+ m.opex.forEach(o=>{if(useRoutes&&o.var)return;lines.push({id:o.id,label:L(o),v:o.v*(o.id==='maint'?sum(m.cats,c=>(+c.qty||0)*(1+(+c.maintPct||0)/100)):qty)*(o.id==='diesel'?dF:1),var:!!o.var})});
  if(useRoutes)lines.push({id:'routeDirect',label:T('routeDirect'),v:sum(rts,o=>o.x.costM),var:true});
  lines.push({id:'drivers',label:T('driversCost'),v:drivers*m.drv.cost,var:false});
  m.fixed.forEach(o=>lines.push({id:o.id,label:L(o),v:+o.v||0,var:false}));
  const varM=sum(lines.filter(l=>l.var),l=>l.v),fixM=sum(lines.filter(l=>!l.var),l=>l.v);
  const opexM=varM+fixM,ebitdaM=revM-opexM;
- const truckCost=sum(m.cats,c=>(+c.qty||0)*(+c.price||0));
+ const truckCost=sum(m.cats,c=>(+c.qty||0)*landed(c,f).total);
  const invLines=[{id:'trucks',label:T('invTrucks'),v:truckCost}].concat(m.inv.map(i=>({id:i.id,label:L(i),v:i.kind==='truck'?i.v*qty:+i.v||0})));
  const invest=sum(invLines,x=>x.v);
  const imp=m.inv.find(i=>i.id==='import');
- const vehAcq=truckCost+(imp?(imp.kind==='truck'?imp.v*qty:imp.v):0);
+ const impPer=imp?(imp.kind==='truck'?+imp.v||0:(+imp.v||0)/Math.max(1,qty)):0;
+ const vehAcq=truckCost+impPer*qty;
+ const depArr=[0,1,2,3,4].map(y=>sum(m.cats,c=>depOf(c,f,y,impPer)));
  const wc=(m.inv.find(i=>i.id==='wc')||{v:0}).v;
- const dep=f.life>0?vehAcq*(1-f.resid/100)/f.life:0;
+ const dep=depArr[0];
  const rampF=f.ramp?(3*f.r1+3*f.r2+600)/1200:1;
  let lossPool=0;const Y=[];
  for(let y=0;y<5;y++){
   const ut=(y===0?rampF:1)*u,gR=Math.pow(1+f.revG/100,y),gC=Math.pow(1+f.costG/100,y);
-  const rev=revM*12*ut*gR,vc=varM*12*ut*gC,fc=fixM*12*gC,ebitda=rev-vc-fc,d=y<f.life?dep:0,ebit=ebitda-d;
+  const rev=revM*12*ut*gR,vc=varM*12*ut*gC,fc=fixM*12*gC,ebitda=rev-vc-fc,d=depArr[y],ebit=ebitda-d;
   let taxable;
   if(f.lossCF){if(ebit<0){lossPool+=-ebit;taxable=0}else{const use=Math.min(lossPool,ebit);lossPool-=use;taxable=ebit-use}}else taxable=Math.max(0,ebit);
   const tax=taxable*f.tax/100,net=ebit-tax,capex=+f.mcapex||0,fcf=ebitda-tax-capex;
   Y.push({year:f.start+y,rev,vc,gross:rev-vc,fc,ebitda,dep:d,ebit,tax,net,ocf:ebitda-tax,capex,fcf});
  }
- const book=Math.max(0,vehAcq-dep*Math.min(5,f.life));
+ const book=sum(m.cats,c=>bookOf(c,f,impPer));
  const liq=book+wc,gc=Y[4].ebitda*f.mult;
  const term=f.term==='liq'?liq:f.term==='gc'?gc:0;
  const flows0=[-invest,...Y.map(y=>y.fcf)];
@@ -664,11 +697,11 @@ function applyShock(m,sh){
   case 'diesel':m.fin.diesel*=k;break;
   case 'drivers':m.drv.cost*=k;break;
   case 'opex':m.opex.forEach(o=>o.v*=k);m.fixed.forEach(o=>o.v*=k);m.drv.cost*=k;break;
-  case 'capex':m.cats.forEach(c=>c.price*=k);m.inv.forEach(i=>{if(i.kind==='truck')i.v*=k});break;
+  case 'capex':m.cats.forEach(c=>{c.price*=k;c.trailer=(+c.trailer||0)*k});m.inv.forEach(i=>{if(i.kind==='truck')i.v*=k});break;
  }return m}
 function seek(m,lever,tg){
  const met=mm=>{const r=calc(mm);return tg.k==='irr'?(r.irr==null?-1:r.irr)-tg.v/100:tg.k==='npv'?r.npv:r.ebitdaM};
- const mk=x=>{const mm=clone(m);if(lever==='rev')scaleRev(mm,x);else if(lever==='util')mm._util=(mm._util||1)*x;else if(lever==='diesel')mm.fin.diesel=x;else if(lever==='capex'){mm.cats.forEach(c=>c.price*=x);mm.inv.forEach(i=>{if(i.kind==='truck')i.v*=x})}return mm};
+ const mk=x=>{const mm=clone(m);if(lever==='rev')scaleRev(mm,x);else if(lever==='util')mm._util=(mm._util||1)*x;else if(lever==='diesel')mm.fin.diesel=x;else if(lever==='capex'){mm.cats.forEach(c=>{c.price*=x;c.trailer=(+c.trailer||0)*x});mm.inv.forEach(i=>{if(i.kind==='truck')i.v*=x})}return mm};
  let lo=lever==='diesel'?0.001:0.2,hi=lever==='diesel'?5:3;let flo=met(mk(lo)),fhi=met(mk(hi));
  if(flo*fhi>0)return null;
  for(let i=0;i<70;i++){const mid=(lo+hi)/2,fm=met(mk(mid));if(flo*fm<=0)hi=mid;else{lo=mid;flo=fm}}return (lo+hi)/2;
@@ -729,7 +762,7 @@ async function flush(){clearTimeout(pushT);const ids=[...DB.dirty];DB.dirty.clea
   if(error||!data||!data.length){ok=false;console.warn('save',error&&error.message)}}
  setStatus(ok?'saved':'error');return ok}
 function toast(msg,ok){DB.toast=msg;DB.toastOk=!!ok;render();setTimeout(()=>{if(DB.toast===msg){DB.toast='';render()}},6000)}
-const FL={routes:{name:'rt_name',cat:'rt_cat',trucks:'rt_trucks',roundsDay:'rt_roundsDay',days:'rt_days',pricing:'rt_pc',priceRound:'rt_priceRound',priceTon:'rt_priceTon',priceKm:'rt_priceKm',tons:'rt_tons',loaded:'rt_loaded',empty:'rt_empty',speed:'rt_speed',load:'rt_load',unload:'rt_unload',wait:'rt_wait',maxH:'rt_maxH',cons:'rt_cons',mt:'rt_mt',fee:'rt_fee',bonus:'rt_bonus'},cats:{qty:'col_qty',price:'col_price',rev:'col_revTruck',fa:'col_category',en:'col_category'},opex:{v:'col_perTruck',fa:'col_line',en:'col_line'},fixed:{v:'fixedOverhead',fa:'col_line',en:'col_line'},inv:{v:'col_value',kind:'col_type',fa:'col_line',en:'col_line'},investors:{amt:'iv_amt',name:'iv_name'},risks:{p:'rk_prob',st:'rk_status',owner:'rk_owner',cat:'rk_cat',t:'rk_new',m:'rk_mit',type:'rk_shock',pct:'sh_pct'}};
+const FL={routes:{consL:'rt_consL',consE:'rt_consE',publicRoad:'rt_public',name:'rt_name',cat:'rt_cat',trucks:'rt_trucks',roundsDay:'rt_roundsDay',days:'rt_days',pricing:'rt_pc',priceRound:'rt_priceRound',priceTon:'rt_priceTon',priceKm:'rt_priceKm',tons:'rt_tons',loaded:'rt_loaded',empty:'rt_empty',speed:'rt_speed',load:'rt_load',unload:'rt_unload',wait:'rt_wait',maxH:'rt_maxH',cons:'rt_cons',mt:'rt_mt',fee:'rt_fee',bonus:'rt_bonus'},cats:{cond:'cd_cond',age:'cd_age',cur:'cd_cur',trailer:'cd_trailer',ship:'cd_ship',duty:'cd_duty',reg:'cd_reg',life:'cd_tLife',resid:'cd_tResid',trLife:'cd_trLife',trResid:'cd_trResid',maintPct:'cd_maint',tare:'cd_tare',legal:'cd_legal',qty:'col_qty',price:'cd_price',rev:'col_revTruck',fa:'col_category',en:'col_category'},opex:{v:'col_perTruck',fa:'col_line',en:'col_line'},fixed:{v:'fixedOverhead',fa:'col_line',en:'col_line'},inv:{v:'col_value',kind:'col_type',fa:'col_line',en:'col_line'},investors:{amt:'iv_amt',name:'iv_name'},risks:{p:'rk_prob',st:'rk_status',owner:'rk_owner',cat:'rk_cat',t:'rk_new',m:'rk_mit',type:'rk_shock',pct:'sh_pct'}};
 function labelFor(path,scnId){
  if(!path)return '';const sc=S.scns.find(s=>s.id===scnId);const m=sc?sc.model:null;const ps=path.split('.');
  if(ps[0]==='fin')return T('f_'+ps[1]);if(ps[0]==='trip')return T('t_'+ps[1]);if(ps[0]==='drv')return ps[1]?T('drv_'+ps[1]):T('driversCost');
@@ -817,7 +850,7 @@ function warnings(){const w=[],m=M(),r=R;
  if(TR.hoursDay>m.trip.maxH)w.push(['',T('w_hours')]);
  if(r.conf<.5)w.push(['',T('w_conf')]);
  if(r.DV.cov<0.999)w.push(['',T('w_drivers',fmt(r.drivers),pct(r.DV.cov,0),fmt(r.DV.rec))]);
- if(r.useRoutes){routeWarn(m).forEach(x=>w.push(x));r.rts.forEach(o=>{if(o.x.cont<0||o.rt.roundsDay>o.x.maxR+1e-9)w.push(['bad',`${L(o.rt.name)}: ${o.x.cont<0?T('w_rtNeg'):T('w_rtHours',fmt(o.rt.roundsDay,1),fmt(o.x.maxInt))}`])})}
+ if(r.useRoutes){routeWarn(m).forEach(x=>w.push(x));r.rts.forEach(o=>{if(o.x.cont<0||o.rt.roundsDay>o.x.maxR+1e-9)w.push(['bad',`${L(o.rt.name)}: ${o.x.cont<0?T('w_rtNeg'):T('w_rtHours',fmt(o.rt.roundsDay,1),fmt(o.x.maxInt))}`]);if(o.x.overW&&o.rt.publicRoad)w.push(['bad',`${L(o.rt.name)}: ${T('w_rtOverW',fmt(o.x.gross,1),fmt(o.x.legal,1))}`])})}
  const com=sum(m.investors,i=>+i.amt||0);if(com<r.invest-0.5)w.push(['',T('w_gap',moneyT(r.invest-com))]);
  return w}
 function vDashboard(){
@@ -855,6 +888,23 @@ function vDashboard(){
   <section class="panel"><h2>${T('c_cost')}</h2>${hbars(r.lines.slice().sort((a,b)=>b.v-a.v))}</section>
  </div>`;
 }
+function vehPanel(){const m=M(),f=m.fin,ce=canEdit();if(!m.cats.length)return '';
+ const imp=m.inv.find(i=>i.id==='import'),impPer=imp?(imp.kind==='truck'?+imp.v||0:(+imp.v||0)/Math.max(1,R.qty)):0;
+ const cards=m.cats.map(c=>{const P='cats#'+c.id,L1=landed(c,f),cur=c.cur||'OMR';
+  const seg=['new','used'].map(k=>`<button class="${(c.cond||'new')===k?'on':''}" data-act="setp" data-path="${P}.cond" data-val="${k}" ${ce?'':'disabled'}>${T('cond_'+k)}</button>`).join('');
+  const one={...c,qty:1};const dep1=depOf(one,f,0,impPer);
+  const row=(k,v,cl='')=>`<tr class="${cl}"><td>${T(k)}</td><td class="n">${v}</td></tr>`;
+  return `<details class="vd" data-cat="${c.id}" ${(S.ui.open||{})[c.id]?'open':''}><summary><span class="row" style="gap:10px"><b>${esc(L(c))}</b><span class="pill ${c.cond==='used'?'warn':''}">${T('cond_'+(c.cond||'new'))}</span><span class="muted small">${T('cd_landed')}: ${moneyT(L1.total)}${cur!=='OMR'?` (${cur})`:''}</span></span></summary>
+  <div class="vd-grid">
+   <div><h3 class="sub">${T('cd_buy')}</h3><div class="seg" style="margin-bottom:12px">${seg}</div>
+    <div class="fields">${c.cond==='used'?field(T('cd_age'),numIn(P+'.age',1)):''}${field(T('cd_cur'),selIn(P+'.cur',[['OMR','OMR'],['EUR','EUR'],['USD','USD']]))}${field(T('cd_price'),numIn(P+'.price'))}${field(T('cd_trailer'),numIn(P+'.trailer'))}${field(T('cd_ship'),numIn(P+'.ship'))}${field(T('cd_duty'),numIn(P+'.duty',1))}${field(T('cd_reg'),numIn(P+'.reg'))}</div>
+    <div class="tscroll" style="margin-top:12px"><table class="tbl"><tbody>${row('cd_cif',fmt(L1.cif))}${row('cd_dutyAmt',fmt(L1.duty))}${row('cd_regAmt',fmt(L1.reg))}${row('cd_landed',fmt(L1.total),'key')}${row('cd_fleetCost',fmt(L1.total*(+c.qty||0)),'sub')}</tbody></table></div></div>
+   <div><h3 class="sub">${T('cd_life')}</h3><div class="fields">${field(T('cd_tLife'),numIn(P+'.life',1))}${field(T('cd_tResid'),numIn(P+'.resid',1))}${field(T('cd_trLife'),numIn(P+'.trLife',1))}${field(T('cd_trResid'),numIn(P+'.trResid',1))}${field(T('cd_maint'),numIn(P+'.maintPct',1))}</div>
+    <p class="note">${T('cd_maintHint')}</p><div class="tscroll"><table class="tbl"><tbody>${row('cd_depY',fmt(dep1),'key')}</tbody></table></div></div>
+   <div><h3 class="sub">${T('cd_weight')}</h3><div class="fields">${field(T('cd_tare'),numIn(P+'.tare',1))}${field(T('cd_legal'),numIn(P+'.legal',1))}</div>
+    <p class="note">${T('cd_legalHint')}</p>${+c.legal>0?`<div class="tscroll"><table class="tbl"><tbody>${row('cd_payload',`${fmt(Math.max(0,c.legal-c.tare),1)} ${T('ton')}`,'key')}</tbody></table></div>`:''}</div>
+  </div></details>`}).join('');
+ return `<section class="panel"><h2>${T('cat_details')}</h2><p class="muted small" style="margin-top:-8px">${T('cat_detailsSub')}</p><div class="stack" style="gap:10px">${cards}</div></section>`}
 function drvPanel(){const m=M(),r=R,d=m.drv,ce=canEdit(),D=r.DV;
  const seg=['auto','ratio','manual'].map(k=>`<button class="${d.mode===k?'on':''}" data-act="setp" data-path="drv.mode" data-val="${k}" ${ce?'':'disabled'}>${T('dm_'+k)}</button>`).join('');
  const box=(k,v,c='')=>`<div><span>${T(k)}</span><b class="tn ${c}">${v}</b></div>`;
@@ -867,26 +917,27 @@ function drvPanel(){const m=M(),r=R,d=m.drv,ce=canEdit(),D=r.DV;
  <p class="note">${T('dv_note',fmt(r.qty),fmt(d.shifts),fmt(d.truckDays),fmt(d.driverDays),fmt(d.absence),fmt(D.rec))}</p></section>`}
 function vAssumptions(){
  const m=M(),r=R,q=r.qty,ce=canEdit();
- const catRows=m.cats.map(c=>`<tr><td>${txtIn(`cats#${c.id}.${S.lang}`)}</td><td style="width:90px">${numIn(`cats#${c.id}.qty`)}</td><td>${numIn(`cats#${c.id}.price`)}</td><td>${numIn(`cats#${c.id}.rev`)}</td><td class="n">${fmt(c.qty*c.rev)}</td><td>${srcChip('cats#'+c.id)}</td><td>${edited('cats#'+c.id)}</td><td>${ce&&m.cats.length>1?`<button class="btn ghost" data-act="del" data-arg="cats#${c.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`).join('');
+ const catRows=m.cats.map(c=>`<tr><td>${txtIn(`cats#${c.id}.${S.lang}`)}</td><td style="width:90px">${numIn(`cats#${c.id}.qty`)}</td><td><span class="pill ${c.cond==='used'?'warn':''}">${T('cond_'+(c.cond||'new'))}</span></td><td class="n">${fmt(landed(c,m.fin).total)}</td><td>${numIn(`cats#${c.id}.rev`)}</td><td class="n">${fmt(c.qty*c.rev)}</td><td>${srcChip('cats#'+c.id)}</td><td>${edited('cats#'+c.id)}</td><td>${ce&&m.cats.length>1?`<button class="btn ghost" data-act="del" data-arg="cats#${c.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`).join('');
  const dF=m.fin.diesel/m.fin.dieselRef;
  const opRows=m.opex.map(o=>`<tr><td>${txtIn(`opex#${o.id}.${S.lang}`)}</td><td>${numIn(`opex#${o.id}.v`,3)}</td><td>${selIn(`opex#${o.id}.var`,[[1,T('t_var')],[0,T('t_fix')]],1)}</td><td class="n">${fmt(o.v*q*(o.id==='diesel'?dF:1))}</td><td>${srcChip('opex#'+o.id)}</td><td>${edited('opex#'+o.id)}</td><td>${ce&&o.id!=='diesel'?`<button class="btn ghost" data-act="del" data-arg="opex#${o.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`).join('');
  const fxRows=m.fixed.map(o=>`<tr><td>${txtIn(`fixed#${o.id}.${S.lang}`)}</td><td>${numIn(`fixed#${o.id}.v`)}</td><td><span class="pill">${T('t_fix')}</span></td><td class="n">${fmt(o.v)}</td><td>${srcChip('fixed#'+o.id)}</td><td>${edited('fixed#'+o.id)}</td><td></td></tr>`).join('');
  const invRows=m.inv.map(i=>`<tr><td>${txtIn(`inv#${i.id}.${S.lang}`)}</td><td>${selIn(`inv#${i.id}.kind`,[['truck',T('kind_truck')],['fixed',T('kind_fixed')]])}</td><td>${numIn(`inv#${i.id}.v`)}</td><td class="n">${fmt(i.kind==='truck'?i.v*q:i.v)}</td><td>${srcChip('inv#'+i.id)}</td><td>${edited('inv#'+i.id)}</td><td>${ce&&!['import','wc'].includes(i.id)?`<button class="btn ghost" data-act="del" data-arg="inv#${i.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`).join('');
  const F=(k,d=1)=>field(T('f_'+k),numIn('fin.'+k,d),m.meta&&m.meta['fin.'+k]?srcChip('fin.'+k):'');
  return head(T('a_title'),T('a_sub'))+`<div class="stack">
- <section class="panel"><h2>${T('sec_fleet')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_category')}</th><th>${T('col_qty')}</th><th>${T('col_price')}</th><th>${T('col_revTruck')}</th><th class="n">${T('col_revTotal')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${catRows}
- <tr class="tot"><td>${T('total')}</td><td class="n">${fmt(q)}</td><td class="n">${fmt(sum(m.cats,c=>c.qty*c.price))}</td><td></td><td class="n">${fmt(r.revM)}</td><td colspan="3"></td></tr></tbody></table></div>
+ <section class="panel"><h2>${T('sec_fleet')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_category')}</th><th>${T('col_qty')}</th><th>${T('col_cond')}</th><th class="n">${T('col_landed')}</th><th>${T('col_revTruck')}</th><th class="n">${T('col_revTotal')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${catRows}
+ <tr class="tot"><td>${T('total')}</td><td class="n">${fmt(q)}</td><td></td><td class="n">${fmt(r.invLines[0].v)}</td><td></td><td class="n">${fmt(r.revM)}</td><td colspan="3"></td></tr></tbody></table></div>
  ${ce?`<div class="row" style="margin-top:12px"><button class="btn" data-act="addCat">${ic('plus')}${T('addCat')}</button></div>`:''}</section>
  <section class="panel"><h2>${T('sec_opex')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_line')}</th><th>${T('col_perTruck')}</th><th>${T('col_type')}</th><th class="n">${T('col_monthly')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${opRows}
  <tr><td class="lbl">${T('driversCost')}<div class="small muted" style="margin-top:4px"><a href="#drivers-sec" style="color:var(--teal)">${T('drvRow',fmt(r.drivers))}</a></div></td><td>${numIn('drv.cost')}<div class="small muted" style="margin-top:4px">${T('drvCost')}</div></td><td><span class="pill">${T('t_fix')}</span></td><td class="n">${fmt(r.drivers*m.drv.cost)}</td><td>${srcChip('drv')}</td><td>${edited('drv')}</td><td></td></tr>
  ${fxRows}<tr class="tot"><td>${T('total')}</td><td></td><td></td><td class="n">${fmt(r.opexM)}</td><td colspan="3"></td></tr></tbody></table></div>
  <p class="note">${T('dieselNote',fmt(m.fin.diesel,3))}</p>${ce?`<div class="row" style="margin-top:6px"><button class="btn" data-act="addCost">${ic('plus')}${T('addCost')}</button></div>`:''}</section>
+ ${vehPanel()}
  ${drvPanel()}
  <section class="panel"><h2>${T('sec_inv')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_line')}</th><th>${T('col_type')}</th><th>${T('col_value')}</th><th class="n">${T('col_amount')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>
  <tr class="sub"><td class="lbl">${T('invTrucks')}</td><td><span class="pill">${T('kind_calc')}</span></td><td></td><td class="n">${fmt(r.invLines[0].v)}</td><td></td><td></td><td></td></tr>${invRows}
  <tr class="tot"><td>${T('total')}</td><td></td><td></td><td class="n">${fmt(r.invest)}</td><td colspan="3"></td></tr></tbody></table></div>
  ${ce?`<div class="row" style="margin-top:12px"><button class="btn" data-act="addInv">${ic('plus')}${T('addInv')}</button></div>`:''}</section>
- <section class="panel"><h2>${T('sec_fin')}</h2><div class="fields">${F('diesel',3)}${F('revG')}${F('costG')}${F('tax')}${F('life',0)}${F('resid')}${F('mcapex',0)}${F('disc')}${F('start',0)}</div>
+ <section class="panel"><h2>${T('sec_fin')}</h2><div class="fields">${F('diesel',3)}${F('fxEUR',4)}${F('fxUSD',4)}${F('revG')}${F('costG')}${F('tax')}${F('life',0)}${F('resid')}${F('mcapex',0)}${F('disc')}${F('start',0)}</div>
  <label class="check" style="margin-top:16px"><input type="checkbox" data-bind="fin.lossCF" ${m.fin.lossCF?'checked':''} ${dis()}>${T('f_lossCF')}</label></section>
  <section class="panel"><h2>${T('sec_ramp')}</h2><label class="check" style="margin-bottom:14px"><input type="checkbox" data-bind="fin.ramp" ${m.fin.ramp?'checked':''} ${dis()}>${T('f_ramp')}</label>
  <div class="fields">${F('r1',0)}${F('r2',0)}</div><p class="note">${T('rampNote')}</p></section></div>`;
@@ -1096,24 +1147,24 @@ function vEmpty(){return cardWrap(`<h1 style="font-size:22px">${T('empty_title')
  ${canCreate()?`<div class="stack" style="gap:10px"><button class="btn pri" data-act="blankFirst" style="justify-content:center;padding:10px" ${DB.busy?'disabled':''}>${T('empty_blank')}</button><button class="btn" data-act="seedDemo" style="justify-content:center;padding:10px" ${DB.busy?'disabled':''}>${T('empty_btn')}</button></div>`:''}
  <div class="row" style="justify-content:flex-end;margin-top:16px"><button class="linkbtn" data-act="signOut">${T('signOut')}</button></div>`)}
 function newRoute(m,mine){const id='rt'+Math.random().toString(36).slice(2,8);const cat=(m.cats.find(c=>c.id===(mine?'dump':''))||m.cats[0]||{id:''}).id;
- return mine?{id,name:T('rt_addMine').split(':').pop().trim(),cat,trucks:4,roundsDay:3,days:26,pricing:'round',priceRound:42,priceTon:1.7,priceKm:0.9,tons:25,loaded:45,empty:45,speed:45,load:0.5,unload:0.3,wait:0.5,maxH:12,cons:42,mt:0.06,fee:2,bonus:1}
- :{id,name:T('rt_newName'),cat,trucks:1,roundsDay:1,days:26,pricing:'round',priceRound:50,priceTon:2,priceKm:1,tons:25,loaded:50,empty:50,speed:50,load:0.5,unload:0.5,wait:0.5,maxH:12,cons:40,mt:0.06,fee:0,bonus:0}}
+ return mine?{id,name:T('rt_addMine').split(':').pop().trim(),cat,trucks:4,roundsDay:3,days:26,pricing:'round',priceRound:42,priceTon:1.7,priceKm:0.9,tons:25,loaded:45,empty:45,speed:45,load:0.5,unload:0.3,wait:0.5,maxH:12,cons:42,consL:48,consE:32,publicRoad:true,mt:0.06,fee:2,bonus:1}
+ :{id,name:T('rt_newName'),cat,trucks:1,roundsDay:1,days:26,pricing:'round',priceRound:50,priceTon:2,priceKm:1,tons:25,loaded:50,empty:50,speed:50,load:0.5,unload:0.5,wait:0.5,maxH:12,cons:40,consL:45,consE:30,publicRoad:true,mt:0.06,fee:0,bonus:0}}
 function vRoutes(){const m=M(),f=m.fin,ce=canEdit();
  const srcSeg=['topdown','routes'].map(k=>`<button class="${f.revSource===k?'on':''}" data-act="setp" data-path="fin.revSource" data-val="${k}" ${ce?'':'disabled'}>${T('src_'+k)}</button>`).join('');
  const row=(k,v,c='')=>`<tr class="${c}"><td>${T(k)}</td><td class="n">${v}</td></tr>`;
- const cards=m.routes.map((rt,i)=>{const x=calcRoute(rt,f),P='routes#'+rt.id;
+ const cards=m.routes.map((rt,i)=>{const cat=m.cats.find(c=>c.id===rt.cat),x=calcRoute(rt,f,cat),P='routes#'+rt.id;
   const pm=['round','ton','km'].map(k=>`<button class="${rt.pricing===k?'on':''}" data-act="setp" data-path="${P}.pricing" data-val="${k}" ${ce?'':'disabled'}>${T('pm_'+k)}</button>`).join('');
   const price=rt.pricing==='ton'?field(T('rt_priceTon'),numIn(P+'.priceTon',3)):rt.pricing==='km'?field(T('rt_priceKm'),numIn(P+'.priceKm',3)):field(T('rt_priceRound'),numIn(P+'.priceRound',3));
-  const ws=[];if(rt.roundsDay>x.maxR+1e-9)ws.push(['bad',T('w_rtHours',fmt(rt.roundsDay,1),fmt(x.maxInt))]);if(x.cont<0)ws.push(['bad',T('w_rtNeg')]);
+  const ws=[];if(rt.roundsDay>x.maxR+1e-9)ws.push(['bad',T('w_rtHours',fmt(rt.roundsDay,1),fmt(x.maxInt))]);if(x.cont<0)ws.push(['bad',T('w_rtNeg')]);if(x.overW)ws.push(rt.publicRoad?['bad',T('w_rtOverW',fmt(x.gross,1),fmt(x.legal,1))]:['',T('rt_privOk',fmt(x.gross,1),fmt(x.legal,1))]);
   return `<article class="panel route" id="route-${rt.id}">
   <div class="row" style="flex-wrap:nowrap;margin-bottom:6px"><span class="num">${fmt(i+1)}</span><input class="in txt" data-bind="${P}.name" data-text="1" value="${esc(L(rt.name))}" ${dis()} style="font-weight:650;font-size:15px">${ce?`<button class="btn ghost" data-act="del" data-arg="${P}" title="${T('remove')}">${ic('trash')}</button>`:''}</div>
   <div class="rt-grid"><div>
    <h3 class="sub">${T('rt_plan')}</h3><div class="fields">${field(T('rt_cat'),selIn(P+'.cat',m.cats.map(c=>[c.id,L(c)])))}${field(T('rt_trucks'),numIn(P+'.trucks'))}${field(T('rt_roundsDay'),numIn(P+'.roundsDay',2))}${field(T('rt_days'),numIn(P+'.days'))}</div>
-   <h3 class="sub">${T('rt_dist')}</h3><div class="fields">${field(T('rt_loaded'),numIn(P+'.loaded',1))}${field(T('rt_empty'),numIn(P+'.empty',1))}${field(T('rt_speed'),numIn(P+'.speed'))}${field(T('rt_load'),numIn(P+'.load',2))}${field(T('rt_unload'),numIn(P+'.unload',2))}${field(T('rt_wait'),numIn(P+'.wait',2))}${field(T('rt_maxH'),numIn(P+'.maxH',1))}</div>
+   <h3 class="sub">${T('rt_dist')}</h3><div class="fields">${field(T('rt_loaded'),numIn(P+'.loaded',1))}${field(T('rt_empty'),numIn(P+'.empty',1))}${field(T('rt_speed'),numIn(P+'.speed'))}${field(T('rt_load'),numIn(P+'.load',2))}${field(T('rt_unload'),numIn(P+'.unload',2))}${field(T('rt_wait'),numIn(P+'.wait',2))}${field(T('rt_maxH'),numIn(P+'.maxH',1))}</div><label class="check" style="margin-top:12px"><input type="checkbox" data-bind="${P}.publicRoad" ${rt.publicRoad?'checked':''} ${dis()}>${T('rt_public')}</label>
    <h3 class="sub">${T('rt_pc')}</h3><div class="seg" style="margin-bottom:12px">${pm}</div>
-   <div class="fields">${price}${field(T('rt_tons'),numIn(P+'.tons',1))}${field(T('rt_cons'),numIn(P+'.cons',1))}${field(T('rt_mt'),numIn(P+'.mt',3))}${field(T('rt_fee'),numIn(P+'.fee',3))}${field(T('rt_bonus'),numIn(P+'.bonus',3))}</div>
+   <div class="fields">${price}${field(T('rt_tons'),numIn(P+'.tons',1))}${field(T('rt_consL'),numIn(P+'.consL',1))}${field(T('rt_consE'),numIn(P+'.consE',1))}${field(T('rt_mt'),numIn(P+'.mt',3))}${field(T('rt_fee'),numIn(P+'.fee',3))}${field(T('rt_bonus'),numIn(P+'.bonus',3))}</div>
   </div><div class="rt-out"><div class="tscroll"><table class="tbl"><tbody>
-   ${row('rt_roundKm',fmt(x.km,1))}${row('rt_roundH',`${fmt(x.roundH,2)} ${T('hours')}`)}${row('rt_maxRounds',fmt(x.maxR,1))}
+   ${row('rt_roundKm',fmt(x.km,1))}${x.gross>0?row('rt_gross',`<span class="${x.overW&&rt.publicRoad?'neg':''}">${fmt(x.gross,1)}${x.legal>0?` / ${fmt(x.legal,1)}`:''} ${T('ton')}</span>`):''}${row('rt_roundH',`${fmt(x.roundH,2)} ${T('hours')}`)}${row('rt_maxRounds',fmt(x.maxR,1))}
    ${row('rt_revRound',fmt(x.rev,3),'key')}${row('rt_fuelRound',`${fmt(x.fuel,3)} <span class="muted small">(${fmt(x.liters,1)} ${T('liters')})</span>`)}${row('rt_costRound',fmt(x.cost,3))}
    ${row('rt_contRound',`<span class="${cls(x.cont)}">${fmt(x.cont,3)}</span>`,'key')}
    ${row('rt_roundsMonth',fmt(x.rm))}${row('rt_kmMonth',fmt(x.kmM))}${row('rt_revMonth',fmt(x.revM),'key')}${row('rt_contMonth',`<span class="${cls(x.contM)}">${fmt(x.contM)}</span>`,'tot')}
@@ -1121,9 +1172,9 @@ function vRoutes(){const m=M(),f=m.fin,ce=canEdit();
   <div class="small muted" style="margin-top:10px">${T('rt_hoursUse')}: ${pct(x.use,0)} (${fmt(x.hoursDay,1)} / ${fmt(rt.maxH,1)} ${T('hours')})</div><div class="meter"><i class="${x.use>1?'over':''}" style="width:${Math.min(100,x.use*100)}%"></i></div>
   ${ws.length?`<div class="warns" style="margin-top:12px">${ws.map(([c,s])=>`<div class="warn-i ${c}">${ic('warn')}<span>${s}</span></div>`).join('')}</div>`:''}
   </div></div></article>`}).join('');
- const tr=m.cats.map(c=>{const os=m.routes.filter(r=>r.cat===c.id).map(r=>calcRoute(r,f)),a=sum(m.routes.filter(r=>r.cat===c.id),r=>+r.trucks||0);
+ const tr=m.cats.map(c=>{const os=m.routes.filter(r=>r.cat===c.id).map(r=>calcRoute(r,f,m.cats.find(c=>c.id===r.cat))),a=sum(m.routes.filter(r=>r.cat===c.id),r=>+r.trucks||0);
   return `<tr><td>${esc(L(c))}</td><td class="n">${fmt(c.qty)}</td><td class="n ${a>c.qty?'neg':''}">${fmt(a)}</td><td class="n">${fmt(sum(os,o=>o.rm))}</td><td class="n">${fmt(sum(os,o=>o.kmM))}</td><td class="n">${fmt(sum(os,o=>o.revM))}</td><td class="n ${cls(sum(os,o=>o.contM))}">${fmt(sum(os,o=>o.contM))}</td></tr>`}).join('');
- const all=m.routes.map(r=>calcRoute(r,f));const rw=routeWarn(m);
+ const all=m.routes.map(r=>calcRoute(r,f,m.cats.find(c=>c.id===r.cat)));const rw=routeWarn(m);
  return head(T('rt_title'),T('rt_sub'))+`
  <section class="panel" style="margin-bottom:18px"><div class="row"><span class="small muted">${T('rt_source')}</span><div class="seg">${srcSeg}</div></div><p class="note" style="margin-top:12px">${f.revSource==='routes'?T('rt_srcRt'):T('rt_srcTd')}</p></section>
  <div class="stack">${cards||`<div class="panel muted">${T('rt_none')}</div>`}</div>
@@ -1135,10 +1186,11 @@ function vRoutes(){const m=M(),f=m.fin,ce=canEdit();
 const pad=n=>String(n).padStart(2,'0');
 const localDT=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 const ymOf=iso=>{const d=new Date(iso);return `${d.getFullYear()}-${pad(d.getMonth()+1)}`};
-function logCost(l,m){const rt=m.routes.find(x=>x.id===l.route_id);const km=+l.odo_end-(+l.odo_start);const cons=rt?+rt.cons:+m.trip.cons,mt=rt?+rt.mt:+m.trip.mt,fee=rt?(+rt.fee||0)+(+rt.bonus||0):0;
+function logCost(l,m){const rt=m.routes.find(x=>x.id===l.route_id);const km=+l.odo_end-(+l.odo_start);const cat=rt?m.cats.find(c=>c.id===rt.cat):null,xr=rt?calcRoute(rt,m.fin,cat):null;const cons=xr&&xr.km?xr.liters/xr.km*100:+m.trip.cons,mt=rt?+rt.mt*(1+(cat?+cat.maintPct||0:0)/100):+m.trip.mt,fee=rt?(+rt.fee||0)+(+rt.bonus||0):0;
  const fuelL=l.fuel_l!=null?+l.fuel_l:km*cons/100;return fuelL*m.fin.diesel+km*mt+fee}
 function logFlags(){const fl={},by={};[...DB.logs].sort((a,b)=>a.started_at<b.started_at?-1:1).forEach(l=>{const k=(l.truck||'').trim().toLowerCase();const prev=by[k];
   const out=[];if(prev){const g=+l.odo_start-(+prev.odo_end);if(g>0.5)out.push(['',T('lg_flagGap',fmt(g))]);else if(g<-0.5)out.push(['bad',T('lg_flagBack',fmt(-g))])}
+  const rtw=M().routes.find(x=>x.id===l.route_id),cw=rtw?M().cats.find(c=>c.id===rtw.cat):null;if(cw&&+cw.legal>0&&rtw.publicRoad&&l.tons!=null&&(+cw.tare||0)+(+l.tons)>cw.legal)out.push(['bad',T('lg_flagW',fmt((+cw.tare||0)+(+l.tons),1),fmt(cw.legal,1))]);
   const km=+l.odo_end-(+l.odo_start);if(l.planned_km>0&&km>l.planned_km*1.15)out.push(['',T('lg_flagKm',fmt((km/l.planned_km-1)*100,0),fmt(l.planned_km))]);
   fl[l.id]=out;by[k]=l});return fl}
 function vLog(){const m=M(),ce=canCreate(),u=S.ui.log,lf=S.ui.logf;
@@ -1320,7 +1372,7 @@ async function onAct(a,b){
     case 'addInvestor':m.investors.push({id:'i'+id(),name:T('iv_new'),amt:50000,src:'guess'});addLog({t:'add',name:T('iv_new')});break;
     case 'addRoute':m.routes.push(newRoute(m,false));addLog({t:'add',name:T('rt_newName')});break;
     case 'addMine':{const nr=newRoute(m,true);m.routes.push(nr);addLog({t:'add',name:L(nr.name)});break}
-    case 'tripToRoute':{const t=m.trip,pr={trip:'round',km:'km',ton:'ton'}[t.pricing]||'round';const nr=Object.assign(newRoute(m,false),{name:t.name,cat:(m.cats.find(c=>c.id==='cont')||m.cats[0]).id,roundsDay:t.days?Number((t.trips/t.days).toFixed(2)):1,days:t.days,pricing:pr,priceRound:t.pTrip,priceKm:t.pKm,priceTon:t.pTon,tons:t.tons,loaded:t.loaded,empty:t.empty,speed:t.speed,load:t.load,unload:t.unload,wait:0,maxH:t.maxH,cons:t.cons,mt:t.mt,fee:t.other,bonus:t.bonus});
+    case 'tripToRoute':{const t=m.trip,pr={trip:'round',km:'km',ton:'ton'}[t.pricing]||'round';const nr=Object.assign(newRoute(m,false),{name:t.name,cat:(m.cats.find(c=>c.id==='cont')||m.cats[0]).id,roundsDay:t.days?Number((t.trips/t.days).toFixed(2)):1,days:t.days,pricing:pr,priceRound:t.pTrip,priceKm:t.pKm,priceTon:t.pTon,tons:t.tons,loaded:t.loaded,empty:t.empty,speed:t.speed,load:t.load,unload:t.unload,wait:0,maxH:t.maxH,cons:t.cons,consL:t.cons,consE:t.cons,mt:t.mt,fee:t.other,bonus:t.bonus});
      m.routes.push(nr);addLog({t:'add',name:L(nr.name)});cur().updated=Date.now();markDirty(S.cur);location.hash='#routes';return}
     case 'addRisk':m.risks.push({id:'r'+id(),t:T('rk_new'),cat:'ops',p:3,owner:S.user,st:'open',m:'',sh:{type:'rev',pct:-5}});addLog({t:'add',name:T('rk_new')});break;
     default:return;
@@ -1373,6 +1425,7 @@ async function boot(){
    else if(c==='mrole'){const{error}=await sb.from('project_members').update({role:el.value}).eq('project_id',DB.project.id).eq('user_id',el.dataset.id);if(error)toast(error.message);else addLog({t:'member',name:uLabel(usr(el.dataset.id).email)+': '+el.value});await reloadMembers()}
    render();save()}
  });
+ document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.cat){S.ui.open=S.ui.open||{};S.ui.open[d.dataset.cat]=d.open}},true);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;onAct(b.dataset.act,b)});
  document.addEventListener('submit',e=>{const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();onSubmit(f,e.submitter)});
  let wasN=narrow();window.addEventListener('resize',()=>{const n=narrow();if(n!==wasN){wasN=n;render()}});
