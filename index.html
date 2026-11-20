@@ -297,6 +297,12 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
 .vd[open]>summary::before{transform:rotate(90deg)}[dir="rtl"] .vd[open]>summary::before{transform:rotate(-90deg)}
 .vd>summary{display:flex;align-items:center}
 .vd-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px;padding:4px 16px 16px;border-top:1px solid var(--line-2)}
+.modal-bg{position:fixed;inset:0;background:rgba(5,12,21,.5);z-index:50}
+.modal{position:fixed;z-index:51;top:50%;left:50%;transform:translate(-50%,-50%);width:min(520px,calc(100vw - 24px));max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal form{display:flex;flex-direction:column;gap:14px}
+.modal .seg{align-self:flex-start}
+.sc-title{display:flex;align-items:center;gap:6px}.sc-title h3{margin:0}
+textarea.in{min-height:56px;resize:vertical;text-align:start;font:inherit}
 @media (max-width:1180px){.ledger{grid-template-columns:repeat(3,minmax(0,1fr))}.ledger .cell:nth-child(4n){border-inline-end:1px solid var(--line-2)}.ledger .cell:nth-child(3n){border-inline-end:0}}
 @media (max-width:960px){
   .app{grid-template-columns:1fr}
@@ -322,6 +328,7 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
   .kpi{padding:13px 14px}.kpi .v{font-size:21px;white-space:normal}
   .kpi .m small{display:none}
   .drv-out{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .modal{top:auto;bottom:0;left:0;transform:none;width:100%;border-radius:18px 18px 0 0;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
   .bnav{display:flex;position:fixed;bottom:0;inset-inline:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px env(safe-area-inset-bottom,0px)}
   .bnav a,.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px 8px;text-decoration:none;font-size:11px;color:var(--ink-3);border:0;background:transparent;cursor:pointer}
   .bnav .on{color:var(--teal)}
@@ -447,7 +454,17 @@ st_open:['باز','Open'],st_mitig:['در حال کاهش','Mitigating'],st_clos
 sh_rev:['نرخ کرایه، همه انواع','Freight rates, all'],sh_revCat:['درآمد یک نوع حمل','Revenue of one category'],sh_util:['بهره‌وری ناوگان','Fleet utilization'],sh_diesel:['قیمت گازوئیل','Diesel price'],sh_drivers:['هزینه رانندگان','Driver costs'],sh_opex:['همه هزینه‌های عملیاتی','All operating costs'],sh_capex:['قیمت خرید کامیون','Truck purchase price'],
 sh_pct:['تغییر ٪','Change %'],
 p1:['بسیار کم (۱۰٪)','Very low (10%)'],
-ton:['تن','t'],cat_details:['جزئیات خودروها','Vehicle details'],cat_detailsSub:['خرید، ارز، حمل و گمرک، عمر و استهلاک، و وزن هر نوع خودرو. برای باز کردن روی هر ردیف کلیک کنید.','Purchase, currency, shipping and customs, life and depreciation, and weight for each vehicle type. Click a row to open it.'],
+ton:['تن','t'],
+nm_title_new:['سناریوی جدید','New scenario'],nm_title_first:['اولین سناریوی شما','Your first scenario'],
+nm_name:['نام سناریو','Scenario name'],nm_ph:['مثلاً: معدن صحار، ۵ اسکانیای کارکرده','e.g. Sohar quarry, 5 used Scanias'],
+nm_help:['نامی بنویسید که بگوید این سناریو چه چیزی را آزمایش می‌کند: محل کار، تعداد کامیون یا فرض اصلی.','Write a name that says what this scenario tests: the site, the number of trucks or the key assumption.'],
+nm_notes:['توضیح (اختیاری)','Description (optional)'],nm_notesPh:['مثلاً: قیمت از پیش‌فاکتور نمایندگی، کرایه بر اساس قرارداد معدن','e.g. Prices from the dealer quote, rates from the quarry contract'],
+nm_start:['شروع از','Start from'],nm_blank:['خالی','Empty'],nm_copy:['کپی یک سناریو','Copy of a scenario'],nm_vis:['چه کسی ببیند؟','Who can see it?'],
+nm_create:['ساخت سناریو','Create scenario'],cancel:['انصراف','Cancel'],save:['ذخیره','Save'],nm_rename:['تغییر نام','Rename'],
+nm_short:['نام باید دست‌کم ۲ حرف باشد.','The name needs at least 2 characters.'],nm_long:['نام حداکثر ۶۰ حرف است.','The name can be at most 60 characters.'],
+nm_generic:['یک نام توصیفی بنویسید، نه «سناریوی جدید» یا «کپی».','Write a descriptive name, not “New scenario” or “Copy”.'],nm_dup:['سناریویی با همین نام وجود دارد. نام دیگری انتخاب کنید.','A scenario with this name already exists. Pick another name.'],
+nm_created:[(n)=>`سناریوی «${n}» ساخته شد.`,(n)=>`Scenario “${n}” created.`],nm_saved:['نام ذخیره شد.','Name saved.'],nm_notesSaved:['توضیح ذخیره شد.','Description saved.'],
+nm_suggest:['پیشنهاد:','Suggestions:'],sc_notes:['توضیح','Description'],sc_notesPh:['توضیح کوتاه: این سناریو چه چیزی را نشان می‌دهد؟','Short description: what does this scenario show?'],cat_details:['جزئیات خودروها','Vehicle details'],cat_detailsSub:['خرید، ارز، حمل و گمرک، عمر و استهلاک، و وزن هر نوع خودرو. برای باز کردن روی هر ردیف کلیک کنید.','Purchase, currency, shipping and customs, life and depreciation, and weight for each vehicle type. Click a row to open it.'],
 cd_buy:['خرید','Purchase'],cd_cond:['وضعیت','Condition'],cond_new:['نو','New'],cond_used:['کارکرده','Used'],cd_age:['سن خودرو (سال)','Vehicle age (years)'],cd_cur:['ارز خرید','Purchase currency'],
 cd_price:['قیمت کشنده (به ارز خرید)','Tractor price (purchase currency)'],cd_trailer:['قیمت تریلر (به ارز خرید)','Trailer price (purchase currency)'],cd_ship:['حمل تا عمان (ریال، هر دستگاه)','Shipping to Oman (OMR per unit)'],cd_duty:['گمرک ٪','Customs duty %'],cd_reg:['ثبت و پلاک (ریال، هر دستگاه)','Registration (OMR per unit)'],
 cd_life:['عمر و استهلاک','Life and depreciation'],cd_tLife:['عمر باقیمانده کشنده (سال)','Remaining tractor life (years)'],cd_tResid:['ارزش باقیمانده کشنده ٪','Tractor residual value %'],cd_trLife:['عمر تریلر (سال)','Trailer life (years)'],cd_trResid:['ارزش باقیمانده تریلر ٪','Trailer residual value %'],cd_maint:['هزینه نگهداری اضافه ٪','Extra maintenance %'],cd_maintHint:['مثلاً ۲۵٪ برای خودروی کارکرده','e.g. 25% for a used vehicle'],
@@ -753,7 +770,7 @@ const rowToScn=r=>({id:r.id,name:r.name,owner:r.owner_id,vis:r.visibility,model:
 const rowToLog=r=>({at:Date.parse(r.created_at),by:r.user_id,scn:r.scenario_id,t:r.action,path:r.path||undefined,o:r.old_value==null?undefined:r.old_value,n:r.new_value==null?undefined:r.new_value,name:r.detail||''});
 const toEmail=u=>{u=(u||'').trim().toLowerCase();return u.includes('@')?u:u+'@fleet.local'};
 const uLabel=e=>(e||'').endsWith('@fleet.local')?e.split('@')[0]:(e||'');
-const errMsg=e=>{const m=(e&&e.message)||String(e);for(const k of ['invalid_username','username_taken','invalid_password'])if(m.includes(k))return T('err_'+k);if(/invalid login|credentials/i.test(m))return T('err_login');return m};
+const errMsg=e=>{const m=(e&&e.message)||String(e);if(/duplicate key|scenarios_unique_name/i.test(m))return T('nm_dup');for(const k of ['invalid_username','username_taken','invalid_password'])if(m.includes(k))return T('err_'+k);if(/invalid login|credentials/i.test(m))return T('err_login');return m};
 let pushT=null;
 function setStatus(st){DB.status=st;const el=document.getElementById('sync');if(el){el.className='sync '+st;el.textContent=T('sync_'+st)}}
 function markDirty(id){if(!id)return;DB.dirty.add(id);setStatus('saving');clearTimeout(pushT);pushT=setTimeout(flush,700)}
@@ -783,6 +800,7 @@ const ICONS={
  risks:'<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M12 8v5M12 16v.5"/>',
  routes:'<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/>',log:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>',
  team:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/>',signout:'<path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4M6 12h10"/>',
+ edit:'<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
  more:'<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>',
  truck:'<path d="M2 6.5h11v9.5H2zM13 9.5h4.2l3.3 3.4V16H13z"/><circle cx="6" cy="17.5" r="1.9"/><circle cx="16.5" cy="17.5" r="1.9"/>',
  moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
@@ -1030,9 +1048,10 @@ function vScenarios(){
   const vers=s.versions.length?s.versions.slice().reverse().map(v=>`<div class="row"><span class="pill">${T('ver')} ${fmt(v.n)}</span>${avatar(v.by,1)}<span class="small">${esc(L(v.note)||'—')}</span><span class="spacer"></span><span class="small muted">${dt(v.at,1)}</span>${ed?`<button class="btn ghost" data-act="restore" data-arg="${s.id}" data-n="${v.n}">${ic('undo')}${T('sc_restore')}</button>`:''}</div>`).join(''):`<span class="small muted">${T('sc_noVers')}</span>`;
   return `<article class="scard ${isCur?'cur':''}">
    <div class="row"><span class="pill ${s.vis==='official'?'teal':s.vis==='private'?'warn':''}">${T('vis_'+s.vis)}</span><span class="spacer"></span>${isCur?`<span class="pill pos">${ic('check')}${T('sc_active')}</span>`:`<button class="btn" data-act="open" data-arg="${s.id}">${T('sc_open')}</button>`}</div>
-   ${own?`<input class="in txt" data-ctl="rename" data-id="${s.id}" value="${esc(L(s.name))}" aria-label="${T('sc_name')}" style="font-weight:650;font-size:15px">`:`<h3>${esc(L(s.name))}</h3>`}
+   ${S.ui.ren&&S.ui.ren.id===s.id?`<form data-form="rename" class="stack" style="gap:8px"><input class="in txt" data-ui="ren.name" data-live="1" maxlength="60" value="${esc(S.ui.ren.name)}" style="font-weight:650;font-size:15px" aria-label="${T('sc_name')}">${nameErr(S.ui.ren.name,s.id)?`<span class="small neg">${esc(nameErr(S.ui.ren.name,s.id))}</span>`:''}<div class="row"><button type="submit" class="btn pri" ${nameErr(S.ui.ren.name,s.id)?'disabled':''}>${T('save')}</button><button type="button" class="btn ghost" data-act="renCancel">${T('cancel')}</button></div></form>`
+   :`<div class="sc-title"><h3>${esc(L(s.name))}</h3>${(own||isAdmin())?`<button class="btn ghost" data-act="renStart" data-arg="${s.id}" title="${T('nm_rename')}" aria-label="${T('nm_rename')}" style="padding:4px 6px">${ic('edit')}</button>`:''}</div>`}
    <div class="row small muted">${avatar(s.owner,1)}<span>${esc(uname(s.owner))}</span><span>${T('sc_created')}: ${dt(s.created,1)}</span><span>${T('sc_updated')}: ${dt(s.updated,1)}</span></div>
-   ${s.notes?`<div class="small">${esc(L(s.notes))}</div>`:''}
+   ${own||isAdmin()?`<textarea class="in small" data-ctl="notes" data-id="${s.id}" maxlength="200" placeholder="${esc(T('sc_notesPh'))}" aria-label="${T('sc_notes')}">${esc(L(s.notes))}</textarea>`:s.notes?`<div class="small">${esc(L(s.notes))}</div>`:''}
    <div class="mini"><div><span>${T('k_invest')}</span><b class="tn">${compact(r.invest)}</b></div><div><span>NPV</span><b class="tn ${cls(r.npv)}">${compact(r.npv)}</b></div><div><span>IRR</span><b>${pct(r.irr)}</b></div><div><span>${T('k_payback')}</span><b>${r.payback==null?'—':fmt(r.payback,1)}</b></div></div>
    <div class="row">${canCreate()?`<button class="btn" data-act="dup" data-arg="${s.id}">${ic('copy')}${T('sc_dup')}</button>`:''}
     ${own&&s.vis!=='official'?`<select class="sel" data-ctl="vis" data-id="${s.id}"><option value="private" ${s.vis==='private'?'selected':''}>${T('vis_private')}</option><option value="team" ${s.vis==='team'?'selected':''}>${T('vis_team')}</option></select>`:''}${(own&&s.vis!=='official')||isAdmin()?`<button class="btn ghost danger" data-act="delScn" data-arg="${s.id}">${ic('trash')}${T('sc_del')}</button>`:''}</div>
@@ -1109,6 +1128,31 @@ function vRisks(){
  <div class="rk">${cards}</div>
  ${ce?`<div class="row" style="margin-top:16px"><button class="btn" data-act="addRisk">${ic('plus')}${T('rk_add')}</button></div>`:''}`;
 }
+const GENERIC=/^(new scenario|new empty scenario|nytt scenario|scenario|copy|kopi|untitled|test|سناریو|سناریوی جدید|سناریوی خالی جدید|کپی|بدون نام)\s*\d*$/i;
+function nameErr(n,exceptId){n=(n||'').trim();if(n.length<2)return T('nm_short');if(n.length>60)return T('nm_long');
+ if(GENERIC.test(n)||/^(my copy of|copy of|kopi av|نسخه من از|کپی)\s/i.test(n))return T('nm_generic');
+ if(S.scns.some(s=>s.id!==exceptId&&L(s.name).trim().toLowerCase()===n.toLowerCase()))return T('nm_dup');return ''}
+function openDlg(o){S.ui.dlg=Object.assign({name:'',notes:'',vis:'private',start:'blank',src:'',err:'',focus:true},o);render()}
+function nameSuggestions(d){const me=uname(S.user),out=[];const src=d.start==='copy'?S.scns.find(s=>s.id===d.src):null;const m=src?src.model:null;
+ if(m&&m.cats&&m.cats.length){const c=m.cats.slice().sort((a,b)=>b.qty-a.qty)[0];out.push(`${fmt(sum(m.cats,x=>+x.qty||0))} ${L(c)}`);}
+ if(src)out.push(`${me}: ${L(src.name)}`.slice(0,60));
+ out.push(`${me}, ${new Intl.DateTimeFormat(S.lang==='fa'?'fa-IR-u-ca-persian':'en-GB',{month:'long',year:'numeric'}).format(new Date())}`);
+ return [...new Set(out)].filter(x=>!nameErr(x))}
+function dlgHtml(){const d=S.ui.dlg;if(!d)return '';const vis=visible();
+ const seg=['blank','copy'].map(k=>`<button type="button" class="${d.start===k?'on':''}" data-act="dlgStart" data-arg="${k}" ${k==='copy'&&!vis.length?'disabled':''}>${T(k==='blank'?'nm_blank':'nm_copy')}</button>`).join('');
+ const sug=nameSuggestions(d);
+ return `<div class="modal-bg" data-act="dlgClose"></div><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dlg-t"><form data-form="newScn">
+  <h2 id="dlg-t" style="font-size:18px">${T(d.first?'nm_title_first':'nm_title_new')}</h2>
+  <label class="field"><span>${T('nm_name')}</span><input class="in txt" data-ui="dlg.name" data-live="1" maxlength="60" placeholder="${esc(T('nm_ph'))}" value="${esc(d.name)}" autocomplete="off"></label>
+  <p class="small muted" style="margin:-6px 0 0">${T('nm_help')}</p>
+  ${sug.length?`<div class="row" style="gap:6px"><span class="small muted">${T('nm_suggest')}</span>${sug.map(x=>`<button type="button" class="chip" data-act="dlgSug" data-arg="${esc(x)}" style="padding:3px 10px;font-size:12.5px">${esc(x)}</button>`).join('')}</div>`:''}
+  ${d.first?'':`<div class="field"><span>${T('nm_start')}</span><div class="seg">${seg}</div></div>
+  ${d.start==='copy'?`<select class="sel" data-ui="dlg.src" data-live="1" style="max-width:none">${vis.map(s=>`<option value="${s.id}" ${s.id===d.src?'selected':''}>${esc(L(s.name))}${s.owner!==S.user?` (${esc(uname(s.owner))})`:''}</option>`).join('')}</select>`:''}`}
+  <label class="field"><span>${T('nm_notes')}</span><input class="in txt" data-ui="dlg.notes" maxlength="200" placeholder="${esc(T('nm_notesPh'))}" value="${esc(d.notes)}"></label>
+  ${d.first?'':`<div class="field"><span>${T('nm_vis')}</span><select class="sel" data-ui="dlg.vis" style="max-width:none"><option value="private" ${d.vis==='private'?'selected':''}>${T('vis_private')}</option><option value="team" ${d.vis==='team'?'selected':''}>${T('vis_team')}</option></select></div>`}
+  ${(d.err||(d.name.trim().length>1&&nameErr(d.name)))?`<div class="warn-i bad">${ic('warn')}<span>${esc(d.err||nameErr(d.name))}</span></div>`:''}
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-act="dlgClose">${T('cancel')}</button><button type="submit" class="btn pri" ${DB.busy||nameErr(d.name)?'disabled':''}>${ic('check')}${T('nm_create')}</button></div>
+ </form></div>`}
 function vTeam(){
  const adm=isAdmin(),mr=myRole();
  const roles=r=>['owner','admin','editor','viewer'].filter(x=>x!=='owner'||mr==='owner').map(x=>`<option value="${x}" ${x===r?'selected':''}>${T('role_'+x)}</option>`).join('');
@@ -1145,7 +1189,7 @@ function vSetup(){return cardWrap(`<h1 style="font-size:22px">${T('setup_title')
  <div class="row" style="justify-content:space-between;margin-top:16px"><button class="linkbtn" data-act="reloadAll">${T('setup_reload')}</button><button class="linkbtn" data-act="signOut">${T('signOut')}</button></div>`)}
 function vEmpty(){return cardWrap(`<h1 style="font-size:22px">${T('empty_title')}</h1><p class="lead" style="margin-bottom:16px">${canCreate()?T('empty_sub'):T('viewerMsg')}</p>
  ${canCreate()?`<div class="stack" style="gap:10px"><button class="btn pri" data-act="blankFirst" style="justify-content:center;padding:10px" ${DB.busy?'disabled':''}>${T('empty_blank')}</button><button class="btn" data-act="seedDemo" style="justify-content:center;padding:10px" ${DB.busy?'disabled':''}>${T('empty_btn')}</button></div>`:''}
- <div class="row" style="justify-content:flex-end;margin-top:16px"><button class="linkbtn" data-act="signOut">${T('signOut')}</button></div>`)}
+ <div class="row" style="justify-content:flex-end;margin-top:16px"><button class="linkbtn" data-act="signOut">${T('signOut')}</button></div>`)+dlgHtml()}
 function newRoute(m,mine){const id='rt'+Math.random().toString(36).slice(2,8);const cat=(m.cats.find(c=>c.id===(mine?'dump':''))||m.cats[0]||{id:''}).id;
  return mine?{id,name:T('rt_addMine').split(':').pop().trim(),cat,trucks:4,roundsDay:3,days:26,pricing:'round',priceRound:42,priceTon:1.7,priceKm:0.9,tons:25,loaded:45,empty:45,speed:45,load:0.5,unload:0.3,wait:0.5,maxH:12,cons:42,consL:48,consE:32,publicRoad:true,mt:0.06,fee:2,bonus:1}
  :{id,name:T('rt_newName'),cat,trucks:1,roundsDay:1,days:26,pricing:'round',priceRound:50,priceTon:2,priceKm:1,tons:25,loaded:50,empty:50,speed:50,load:0.5,unload:0.5,wait:0.5,maxH:12,cons:40,consL:45,consE:30,publicRoad:true,mt:0.06,fee:0,bonus:0}}
@@ -1245,7 +1289,7 @@ function shell(){
  <div class="mainwrap">
   <header class="top">
    <span class="brand-m">${ic('truck',20)}</span>
-   <label class="scn-pick"><span class="lbl">${T('scenario')}</span><select class="sel" data-ctl="scn" aria-label="${T('scenario')}">${visible().map(s=>`<option value="${s.id}" ${s.id===S.cur?'selected':''}>${esc(L(s.name))}</option>`).join('')}</select></label>
+   <label class="scn-pick"><span class="lbl">${T('scenario')}</span><select class="sel" data-ctl="scn" aria-label="${T('scenario')}">${visible().map(s=>`<option value="${s.id}" ${s.id===S.cur?'selected':''}>${esc(L(s.name))}${s.owner!==S.user?` (${esc(uname(s.owner))})`:''}${s.vis==='private'?` (${T('vis_private')})`:''}</option>`).join('')}</select></label>
    <a class="mode" href="#routes" style="text-decoration:none">${R&&R.useRoutes?T('modeRt'):T('modeTd')}</a>
    <div class="top-r">
     <div class="seg lang"><button data-act="lang" data-arg="fa" class="${S.lang==='fa'?'on':''}" lang="fa">فارسی</button><button data-act="lang" data-arg="en" class="${S.lang==='en'?'on':''}" lang="en">EN</button></div>
@@ -1254,7 +1298,7 @@ function shell(){
     <div class="me">${avatar(u.id)}<div class="who"><b>${esc(u.name)}</b><span>${T('role_'+u.role)}</span></div><button class="icon-btn theme-btn" data-act="signOut" title="${esc(T('signOut'))}" aria-label="${esc(T('signOut'))}">${ic('signout')}</button></div>
    </div>
   </header>
-  <main class="main">${DB.toast?`<div class="banner ${DB.toastOk?'info':''}">${ic(DB.toastOk?'check':'warn')}<span>${esc(DB.toast)}</span></div>`:''}${lockBanner()}${VIEWS[v]()}</main>
+  ${dlgHtml()}<main class="main">${DB.toast?`<div class="banner ${DB.toastOk?'info':''}">${ic(DB.toastOk?'check':'warn')}<span>${esc(DB.toast)}</span></div>`:''}${lockBanner()}${VIEWS[v]()}</main>
  </div></div>
  <nav class="bnav">${bn.map(n=>`<a href="#${n}" class="${v===n?'on':''}">${ic(n)}<span>${T('bn_'+n)}</span></a>`).join('')}<button class="${moreOn?'on':''}" data-act="sheet">${ic('more')}<span>${T('more')}</span></button></nav>
  ${S.ui.sheet?`<div class="sheet-wrap"><div class="sheet-bg" data-act="sheetClose"></div><div class="sheet"><div class="grab"></div>${NAV.filter(n=>!bn.includes(n)).map(n=>`<a href="#${n}" class="${v===n?'on':''}">${ic(n)}<span>${T('nav_'+n)}</span></a>`).join('')}
@@ -1274,6 +1318,7 @@ function render(){
  else if(!cur())html=vEmpty();
  else{R=calc(M());TR=calcTrip(M(),R);html=shell()}
  document.getElementById('root').innerHTML=html;
+ if(S.ui.dlg&&S.ui.dlg.focus){S.ui.dlg.focus=false;keep=null;const el=document.querySelector('[data-ui="dlg.name"]');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length)}}
  if(keep){const el=document.querySelector(keep.b?`[data-bind="${keep.b}"]`:`[data-ui="${keep.u}"]`);if(el){el.value=keep.v;el.focus();try{el.setSelectionRange(keep.s,keep.e)}catch(e){}}}
 }
 
@@ -1340,12 +1385,16 @@ async function onAct(a,b){
   case 'signOut':await flush();if(DB.ch)sb.removeChannel(DB.ch);DB.ch=null;S.ui.sheet=false;await sb.auth.signOut();return;
   case 'reloadAll':await loadAll();return;
   case 'seedDemo':DB.busy=true;render();try{await seedDemo(DB.project.id);await loadProject()}catch(e){toast(e.message)}DB.busy=false;break;
-  case 'blankFirst':{DB.busy=true;render();const{data,error}=await sb.from('scenarios').insert({project_id:DB.project.id,name:T('blank_name'),notes:'',visibility:isAdmin()?'official':'team',model:blankModel()}).select().single();DB.busy=false;
-   if(error)return toast(error.message);if(!S.scns.some(s=>s.id===data.id))S.scns.push(rowToScn(data));S.cur=data.id;addLog({t:'create',scn:data.id});location.hash='#assumptions';break}
-  case 'newBlank':await createScenario({name:T('blank_name'),model:blankModel()},'blank');return;
+  case 'blankFirst':openDlg({first:true});return;
+  case 'newBlank':openDlg({start:'blank'});return;
   case 'open':await flush();S.cur=arg;break;
-  case 'dup':await createScenario(S.scns.find(s=>s.id===arg),false);return;
-  case 'newScn':await createScenario(S.scns.find(s=>s.vis==='official')||visible()[0],true);return;
+  case 'dup':openDlg({start:'copy',src:arg});return;
+  case 'newScn':openDlg({start:'copy',src:(S.scns.find(s=>s.vis==='official')||visible()[0]||{}).id||''});return;
+  case 'dlgClose':S.ui.dlg=null;break;
+  case 'dlgStart':S.ui.dlg.start=arg;if(arg==='copy'&&!S.ui.dlg.src)S.ui.dlg.src=(S.scns.find(s=>s.id===S.cur)||visible()[0]||{}).id||'';S.ui.dlg.err='';break;
+  case 'dlgSug':S.ui.dlg.name=arg;S.ui.dlg.err='';S.ui.dlg.focus=true;break;
+  case 'renStart':{const s=S.scns.find(x=>x.id===arg);S.ui.ren={id:arg,name:L(s.name)};break}
+  case 'renCancel':S.ui.ren=null;break;
   case 'delScn':{const s=S.scns.find(x=>x.id===arg);if(!s||!((s.owner===S.user&&s.vis!=='official')||isAdmin()))return;
    const{error}=await sb.from('scenarios').delete().eq('id',arg);if(error)return toast(error.message);
    S.scns=S.scns.filter(x=>x.id!==arg);addLog({t:'delete',scn:arg,name:L(s.name)});break}
@@ -1390,6 +1439,14 @@ async function onSubmit(form,sub){
    if(error)DB.authMsg=errMsg(error);else{const r2=await sb.auth.signInWithPassword({email:toEmail(a.email),password:a.pw||''});if(r2.error)DB.authMsg=errMsg(r2.error);else{S.ui.auth={};S.ui.authMode='in'}}}
   else if(k==='createProject'){const{data,error}=await sb.rpc('create_project',{p_name:S.ui.setup.name||'Oman Fleet'});if(error)throw error;S.ui.project=data;
    DB.project={id:data,name:S.ui.setup.name};await reloadMembers();if(sub&&sub.dataset.mode==='demo')await seedDemo(data);else{const r2=await sb.from('scenarios').insert({project_id:data,name:T('blank_name'),notes:'',visibility:'official',model:blankModel()});if(r2.error)throw r2.error}DB.busy=false;await loadAll();return}
+  else if(k==='newScn'){const d=S.ui.dlg,name=(d.name||'').trim(),e1=nameErr(name);if(e1){d.err=e1;DB.busy=false;render();return}
+   const src=d.start==='copy'&&!d.first?S.scns.find(s=>s.id===d.src):null;await flush();
+   const{data,error}=await sb.from('scenarios').insert({project_id:DB.project.id,name,notes:(d.notes||'').trim(),visibility:d.first?(isAdmin()?'official':'team'):(d.vis||'private'),model:src?clone(src.model):blankModel()}).select().single();
+   if(error){d.err=errMsg(error);DB.busy=false;render();return}
+   if(!S.scns.some(s=>s.id===data.id))S.scns.push(rowToScn(data));S.cur=data.id;addLog({t:'create',scn:data.id});S.ui.dlg=null;DB.busy=false;
+   if(!src)location.hash='#assumptions';toast(T('nm_created',name),1);return}
+  else if(k==='rename'){const r0=S.ui.ren,s=S.scns.find(x=>x.id===r0.id),nn=(r0.name||'').trim(),e1=nameErr(nn,r0.id);if(!s||e1){DB.busy=false;render();return}
+   const o=L(s.name);if(nn!==o&&await updateScn(s.id,{name:nn})){s.name=nn;s.updated=Date.now();addLog({t:'edit',scn:s.id,o,n:nn});S.ui.ren=null;DB.busy=false;toast(T('nm_saved'),1);return}S.ui.ren=null}
   else if(k==='addLog'){const u=S.ui.log,m=M();const o1=parseNum(u.o1),o2=parseNum(u.o2);
    if(!(u.truck||'').trim())throw new Error(T('lg_errTruck'));if(!(o1>=0)||!(o2>o1))throw new Error(T('lg_errOdo'));
    const rt=m.routes.find(r=>r.id===u.route);const num=v=>{const n=parseNum(v);return v===''||v==null||n===undefined?null:n};
@@ -1410,7 +1467,7 @@ async function boot(){
    if(el.dataset.text){v=el.value;const path=el.dataset.bind;const[o,k]=resolve(M(),path);if(o&&typeof o[k]==='object'&&o[k]!==null&&!Array.isArray(o[k])){o[k]=Object.assign({},o[k],{[S.lang]:v})}else setP(M(),path,v)}
    else{v=parseNum(el.value);if(v===undefined)return;setP(M(),el.dataset.bind,v)}
    touch(el.dataset.bind);render()}
-  else if(el.dataset.ui){const[a,b]=el.dataset.ui.split('.');S.ui[a]=S.ui[a]||{};S.ui[a][b]=el.dataset.ui==='gs.v'?(parseNum(el.value)??0):el.value;if(el.dataset.ui==='log.truck')prefillTruck();if(el.dataset.ui==='log.route')prefillRoute();if(el.dataset.live)render();save()}
+  else if(el.dataset.ui){const[a,b]=el.dataset.ui.split('.');S.ui[a]=S.ui[a]||{};S.ui[a][b]=el.dataset.ui==='gs.v'?(parseNum(el.value)??0):el.value;if(a==='dlg'&&S.ui.dlg)S.ui.dlg.err='';if(el.dataset.ui==='log.truck')prefillTruck();if(el.dataset.ui==='log.route')prefillRoute();if(el.dataset.live)render();save()}
  });
  document.addEventListener('change',async e=>{const el=e.target;
   if(el.dataset.bind){if(!cur()||!canEdit())return;const path=el.dataset.bind;let o,n;
@@ -1421,6 +1478,7 @@ async function boot(){
   else if(el.dataset.ctl){const c=el.dataset.ctl;
    if(c==='scn'){await flush();S.cur=el.value}
    else if(c==='rename'){const s=S.scns.find(x=>x.id===el.dataset.id);if(s&&s.owner===S.user){const o=L(s.name),nn=el.value.trim()||o;if(nn!==o&&await updateScn(s.id,{name:nn})){s.name=nn;s.updated=Date.now();addLog({t:'edit',scn:s.id,o,n:nn})}}}
+   else if(c==='notes'){const s=S.scns.find(x=>x.id===el.dataset.id);const nv=el.value.trim();if(s&&nv!==L(s.notes)&&await updateScn(s.id,{notes:nv})){s.notes=nv;toast(T('nm_notesSaved'),1)}}
    else if(c==='vis'){const s=S.scns.find(x=>x.id===el.dataset.id);if(s&&s.owner===S.user&&await updateScn(s.id,{visibility:el.value})){s.vis=el.value;s.updated=Date.now()}}
    else if(c==='mrole'){const{error}=await sb.from('project_members').update({role:el.value}).eq('project_id',DB.project.id).eq('user_id',el.dataset.id);if(error)toast(error.message);else addLog({t:'member',name:uLabel(usr(el.dataset.id).email)+': '+el.value});await reloadMembers()}
    render();save()}
@@ -1428,6 +1486,7 @@ async function boot(){
  document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.cat){S.ui.open=S.ui.open||{};S.ui.open[d.dataset.cat]=d.open}},true);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;onAct(b.dataset.act,b)});
  document.addEventListener('submit',e=>{const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();onSubmit(f,e.submitter)});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(S.ui.dlg||S.ui.ren)){S.ui.dlg=null;S.ui.ren=null;render()}});
  let wasN=narrow();window.addEventListener('resize',()=>{const n=narrow();if(n!==wasN){wasN=n;render()}});
  window.addEventListener('hashchange',()=>{S.ui.sheet=false;render();const el=location.hash==='#drivers-sec'&&document.getElementById('drivers-sec');if(el)el.scrollIntoView();else window.scrollTo(0,0)});
  window.addEventListener('beforeunload',e=>{if(DB.dirty.size){flush();e.preventDefault();e.returnValue=''}});
