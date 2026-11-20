@@ -1,0 +1,3 @@
+-- Admin user management: create users, set passwords and display names, change own password.
+-- Applied version lives in the Supabase project (functions admin_create_user, admin_set_password,
+-- admin_set_display_name, change_own_password). Each checks the caller's project role.

@@ -458,6 +458,14 @@ sh_rev:['نرخ کرایه، همه انواع','Freight rates, all'],sh_revCat:
 sh_pct:['تغییر ٪','Change %'],
 p1:['بسیار کم (۱۰٪)','Very low (10%)'],
 ton:['تن','t'],
+ad_title:['کاربران و دسترسی','Users and access'],ad_sub:['کاربر بسازید، رمز عبور و نام را تغییر دهید و نقش‌ها را تعیین کنید. فقط مالک و مدیر این بخش را می‌بینند.','Create users, change passwords and names, and set roles. Only owners and admins see this section.'],
+ad_new:['کاربر جدید','New user'],ad_user:['نام کاربری','Username'],ad_name:['نام نمایشی','Display name'],ad_pw:['رمز عبور','Password'],ad_role:['نقش','Role'],ad_create:['ساخت کاربر','Create user'],
+ad_created:[(u,p)=>`کاربر «${u}» ساخته شد. رمز عبور: ${p}`,(u,p)=>`User “${u}” created. Password: ${p}`],
+ad_edit:['ویرایش','Edit'],ad_newPw:['رمز عبور جدید (خالی = بدون تغییر)','New password (empty = no change)'],ad_saved:['تغییرات ذخیره شد.','Changes saved.'],
+ad_pwSet:[(u,p)=>`رمز عبور «${u}» به «${p}» تغییر کرد. این کاربر از دستگاه‌های دیگر خارج شد.`,(u,p)=>`Password for “${u}” changed to “${p}”. They were signed out on other devices.`],
+ad_my:['رمز عبور من','My password'],ad_myNew:['رمز عبور جدید','New password'],ad_myRep:['تکرار رمز عبور','Repeat password'],ad_myBtn:['تغییر رمز عبور','Change password'],ad_myDone:['رمز عبور شما تغییر کرد.','Your password was changed.'],ad_mismatch:['دو رمز عبور یکسان نیستند.','The two passwords don’t match.'],
+ad_note:['رمز عبور را مستقیم به خود شخص بدهید. نرم‌افزار رمزها را ذخیره نمی‌کند و فقط شکل رمزگذاری‌شده آن‌ها نگه داشته می‌شود.','Give the password to the person directly. The app does not store passwords; only an encrypted form is kept.'],
+err_not_allowed:['اجازه این کار را ندارید.','You’re not allowed to do that.'],err_invalid_name:['نام باید ۱ تا ۶۰ حرف باشد.','The name must be 1–60 characters.'],
 nav_market:['بازار کامیون','Truck market'],
 mk_title:['بازار کامیون','Truck market'],mk_sub:['کامیون‌هایی را که در نروژ، اروپا یا جای دیگر پیدا می‌کنید اینجا جمع کنید. سامانه قیمت تمام‌شده در عمان را حساب می‌کند، آن‌ها را مقایسه می‌کند و با یک کلیک به بودجه می‌برد.','Collect the trucks you find in Norway, Europe or elsewhere. The system works out the landed cost in Oman, compares them and takes them into a budget with one click.'],
 mk_add:['افزودن کامیون','Add truck'],mk_edit:['ویرایش کامیون','Edit truck'],mk_none:['هنوز کامیونی اضافه نشده است.','No trucks added yet.'],mk_all:['همه','All'],mk_sort:['مرتب‌سازی','Sort by'],
@@ -794,7 +802,7 @@ const rowToScn=r=>({id:r.id,name:r.name,owner:r.owner_id,vis:r.visibility,model:
 const rowToLog=r=>({at:Date.parse(r.created_at),by:r.user_id,scn:r.scenario_id,t:r.action,path:r.path||undefined,o:r.old_value==null?undefined:r.old_value,n:r.new_value==null?undefined:r.new_value,name:r.detail||''});
 const toEmail=u=>{u=(u||'').trim().toLowerCase();return u.includes('@')?u:u+'@fleet.local'};
 const uLabel=e=>(e||'').endsWith('@fleet.local')?e.split('@')[0]:(e||'');
-const errMsg=e=>{const m=(e&&e.message)||String(e);if(/duplicate key|scenarios_unique_name/i.test(m))return T('nm_dup');for(const k of ['invalid_username','username_taken','invalid_password'])if(m.includes(k))return T('err_'+k);if(/invalid login|credentials/i.test(m))return T('err_login');return m};
+const errMsg=e=>{const m=(e&&e.message)||String(e);if(/duplicate key|scenarios_unique_name/i.test(m))return T('nm_dup');for(const k of ['invalid_username','username_taken','invalid_password','not_allowed','invalid_name'])if(m.includes(k))return T('err_'+k);if(/invalid login|credentials/i.test(m))return T('err_login');return m};
 let pushT=null;
 function setStatus(st){DB.status=st;const el=document.getElementById('sync');if(el){el.className='sync '+st;el.textContent=T('sync_'+st)}}
 function markDirty(id){if(!id)return;DB.dirty.add(id);setStatus('saving');clearTimeout(pushT);pushT=setTimeout(flush,700)}
@@ -1179,21 +1187,31 @@ function dlgHtml(){const d=S.ui.dlg;if(!d)return '';const vis=visible();
   <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-act="dlgClose">${T('cancel')}</button><button type="submit" class="btn pri" ${DB.busy||nameErr(d.name)?'disabled':''}>${ic('check')}${T('nm_create')}</button></div>
  </form></div>`}
 function vTeam(){
- const adm=isAdmin(),mr=myRole();
+ const adm=isAdmin(),mr=myRole(),ed=S.ui.uedit||{};
  const roles=r=>['owner','admin','editor','viewer'].filter(x=>x!=='owner'||mr==='owner').map(x=>`<option value="${x}" ${x===r?'selected':''}>${T('role_'+x)}</option>`).join('');
- const rows=USERS.map(u=>{const me=u.id===S.user,canMod=adm&&!me&&(u.role!=='owner'||mr==='owner');
-  return `<tr><td><div class="row" style="flex-wrap:nowrap">${avatar(u.id,1)}<span>${esc(u.name)}${me?` <span class="muted small">(${T('tm_you')})</span>`:''}</span></div></td><td class="small muted" dir="ltr">${esc(uLabel(u.email))}</td>
+ const rows=USERS.map(u=>{const me=u.id===S.user,canMod=adm&&!me&&(u.role!=='owner'||mr==='owner'),canEditU=adm&&(u.role!=='owner'||mr==='owner'||me),open=ed.id===u.id;
+  return `<tr><td><div class="row" style="flex-wrap:nowrap">${avatar(u.id,1)}<span>${esc(u.name)}${me?` <span class="muted small">(${T('tm_you')})</span>`:''}</span></div></td><td class="small muted" dir="ltr">${esc(u.uname||uLabel(u.email))}</td>
   <td>${canMod?`<select class="sel" data-ctl="mrole" data-id="${u.id}">${roles(u.role)}</select>`:`<span class="pill">${T('role_'+u.role)}</span>`}</td>
-  <td>${canMod?`<button class="btn ghost danger" data-act="rmMember" data-arg="${u.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`}).join('');
- const inv=DB.invites.map(i=>`<tr><td dir="ltr">${esc(uLabel(i.email))}</td><td><span class="pill warn">${T('role_'+i.role)}</span></td><td class="small muted">${dt(Date.parse(i.created_at),1)}</td><td>${adm?`<button class="btn ghost danger" data-act="rmInvite" data-arg="${i.id}">${ic('trash')}</button>`:''}</td></tr>`).join('');
- const tm=S.ui.team;
- return head(T('tm_title'),T('tm_sub'))+`<div class="stack">
+  <td style="white-space:nowrap">${canEditU?`<button class="btn ghost" data-act="uEdit" data-arg="${u.id}" title="${T('ad_edit')}">${ic('edit')}</button>`:''}${canMod?`<button class="btn ghost danger" data-act="rmMember" data-arg="${u.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>
+  ${open?`<tr><td colspan="4" style="background:var(--surface-2)"><form data-form="uSave" class="row" style="align-items:flex-end;padding:6px 0">
+   <label class="field" style="flex:1;min-width:160px"><span>${T('ad_name')}</span><input class="in txt" data-ui="uedit.name" value="${esc(ed.name||'')}" maxlength="60"></label>
+   <label class="field" style="flex:1;min-width:160px"><span>${T('ad_newPw')}</span><input class="in" type="text" autocomplete="off" dir="ltr" data-ui="uedit.pw" value="${esc(ed.pw||'')}"></label>
+   <button class="btn pri" type="submit" ${DB.busy?'disabled':''}>${T('save')}</button><button class="btn ghost" type="button" data-act="uEditCancel">${T('cancel')}</button></form></td></tr>`:''}`}).join('');
+ const nu=S.ui.nu||{};const my=S.ui.mypw||{};
+ return head(adm?T('ad_title'):T('tm_title'),adm?T('ad_sub'):T('tm_onlyAdmin'))+`<div class="stack">
  <section class="panel"><h2>${T('tm_members')}</h2><div class="tscroll"><table class="tbl"><tbody>${rows}</tbody></table></div><p class="note">${T('tm_roles')}</p></section>
- ${adm?`<section class="panel"><h2>${T('tm_add')}</h2><form data-form="addMember" class="row" style="align-items:flex-end">
-   <label class="field" style="flex:2;min-width:220px"><span>${T('tm_email')}</span><input class="in txt" required autocapitalize="none" data-ui="team.email" value="${esc(tm.email)}" dir="ltr"></label>
-   <label class="field" style="flex:1;min-width:140px"><span>${T('tm_role')}</span><select class="sel" data-ui="team.role">${roles(tm.role)}</select></label>
-   <button class="btn pri" type="submit" ${DB.busy?'disabled':''}>${ic('plus')}${T('tm_btn')}</button></form></section>
- <section class="panel"><h2>${T('tm_invites')}</h2>${inv?`<div class="tscroll"><table class="tbl"><tbody>${inv}</tbody></table></div>`:`<span class="muted">${T('tm_noInv')}</span>`}</section>`:`<div class="banner info">${T('tm_onlyAdmin')}</div>`}
+ ${adm?`<section class="panel"><h2>${T('ad_new')}</h2><form data-form="uCreate"><div class="fields">
+   <label class="field"><span>${T('ad_user')}</span><input class="in" required autocapitalize="none" spellcheck="false" dir="ltr" data-ui="nu.user" value="${esc(nu.user||'')}"><span class="small muted">${T('auth_userHint')}</span></label>
+   <label class="field"><span>${T('ad_name')}</span><input class="in txt" data-ui="nu.name" value="${esc(nu.name||'')}" maxlength="60"></label>
+   <label class="field"><span>${T('ad_pw')}</span><input class="in" type="text" required autocomplete="off" dir="ltr" data-ui="nu.pw" value="${esc(nu.pw||'')}"></label>
+   <label class="field"><span>${T('ad_role')}</span><select class="sel" data-ui="nu.role" style="max-width:none">${roles(nu.role||'editor')}</select></label></div>
+   <div class="row" style="margin-top:12px"><button class="btn pri" type="submit" ${DB.busy?'disabled':''}>${ic('plus')}${T('ad_create')}</button></div></form>
+   <p class="note">${T('ad_note')}</p></section>`:''}
+ <section class="panel"><h2>${T('ad_my')}</h2><form data-form="myPw" class="row" style="align-items:flex-end">
+   <label class="field" style="flex:1;min-width:160px"><span>${T('ad_myNew')}</span><input class="in" type="password" autocomplete="new-password" dir="ltr" required data-ui="mypw.a" value="${esc(my.a||'')}"></label>
+   <label class="field" style="flex:1;min-width:160px"><span>${T('ad_myRep')}</span><input class="in" type="password" autocomplete="new-password" dir="ltr" required data-ui="mypw.b" value="${esc(my.b||'')}"></label>
+   <button class="btn" type="submit" ${DB.busy?'disabled':''}>${T('ad_myBtn')}</button></form></section>
+ ${adm&&DB.invites.length?`<section class="panel"><h2>${T('tm_invites')}</h2><div class="tscroll"><table class="tbl"><tbody>${DB.invites.map(i=>`<tr><td dir="ltr">${esc(uLabel(i.email))}</td><td><span class="pill warn">${T('role_'+i.role)}</span></td><td class="small muted">${dt(Date.parse(i.created_at),1)}</td><td><button class="btn ghost danger" data-act="rmInvite" data-arg="${i.id}">${ic('trash')}</button></td></tr>`).join('')}</tbody></table></div></section>`:''}
  </div>`;
 }
 function langSeg(){return `<div class="seg lang"><button type="button" data-act="lang" data-arg="fa" class="${S.lang==='fa'?'on':''}" lang="fa">فارسی</button><button type="button" data-act="lang" data-arg="en" class="${S.lang==='en'?'on':''}" lang="en">EN</button></div>`}
@@ -1437,8 +1455,8 @@ async function loadAll(){
  const pick=mem.find(m=>m.project_id===S.ui.project)||mem[0];DB.project=pick.projects;S.ui.project=DB.project.id;
  await loadProject();DB.loading=false;render();save();subscribe();
 }
-async function reloadMembers(){const{data}=await sb.from('project_members').select('user_id,role,profiles(display_name,email)').eq('project_id',DB.project.id);
- USERS=(data||[]).map(x=>({id:x.user_id,name:(x.profiles&&(x.profiles.display_name||x.profiles.email))||'—',email:(x.profiles&&x.profiles.email)||'',role:x.role,c:colorFor(x.user_id)}));
+async function reloadMembers(){const{data}=await sb.from('project_members').select('user_id,role,profiles(display_name,email,username)').eq('project_id',DB.project.id);
+ USERS=(data||[]).map(x=>({id:x.user_id,uname:(x.profiles&&x.profiles.username)||'',name:(x.profiles&&(x.profiles.display_name||x.profiles.email))||'—',email:(x.profiles&&x.profiles.email)||'',role:x.role,c:colorFor(x.user_id)}));
  if(isAdmin()){const r=await sb.from('project_invites').select('*').eq('project_id',DB.project.id).order('created_at');DB.invites=r.data||[]}else DB.invites=[];}
 async function loadProject(){const pid=DB.project.id;
  await reloadMembers();
@@ -1502,6 +1520,8 @@ async function onAct(a,b){
   case 'dup':openDlg({start:'copy',src:arg});return;
   case 'newScn':openDlg({start:'copy',src:(S.scns.find(s=>s.vis==='official')||visible()[0]||{}).id||''});return;
   case 'dlgClose':S.ui.dlg=null;break;
+  case 'uEdit':{const u=usr(arg);S.ui.uedit={id:arg,name:u.name,pw:''};break}
+  case 'uEditCancel':S.ui.uedit=null;break;
   case 'mkStatus':S.ui.mk.status=arg;break;
   case 'ccmp':{const l=S.ui.mk.cmp;if(l.includes(arg))S.ui.mk.cmp=l.filter(x=>x!==arg);else if(l.length<4)l.push(arg);break}
   case 'cmpClear':S.ui.mk.cmp=[];break;
@@ -1594,6 +1614,15 @@ async function onSubmit(form,sub){
    const{data,error}=await sb.from('trip_logs').insert(row).select().single();if(error)throw error;
    if(!DB.logs.some(l=>l.id===data.id))DB.logs.unshift(data);
    S.ui.log={truck:u.truck,driver:u.driver,route:u.route,price:u.price,tons:u.tons,o1:String(o2),o2:'',fuel:'',note:'',at:localDT(new Date())};DB.busy=false;toast(T('lg_saved'),1);return}
+  else if(k==='uCreate'){const nu=S.ui.nu||{};const u=(nu.user||'').trim().toLowerCase(),pw=nu.pw||'';
+   const{error}=await sb.rpc('admin_create_user',{p_project:DB.project.id,p_username:u,p_password:pw,p_display:(nu.name||'').trim(),p_role:nu.role||'editor'});if(error)throw error;
+   S.ui.nu={role:nu.role||'editor'};await reloadMembers();DB.busy=false;toast(T('ad_created',u,pw),1);return}
+  else if(k==='uSave'){const e=S.ui.uedit,u=usr(e.id);let msg=T('ad_saved');
+   if((e.name||'').trim()&&e.name.trim()!==u.name){const{error}=await sb.rpc('admin_set_display_name',{p_project:DB.project.id,p_user:e.id,p_name:e.name.trim()});if(error)throw error}
+   if(e.pw){const{error}=await sb.rpc('admin_set_password',{p_project:DB.project.id,p_user:e.id,p_password:e.pw});if(error)throw error;msg=T('ad_pwSet',u.uname||u.name,e.pw)}
+   S.ui.uedit=null;await reloadMembers();DB.busy=false;toast(msg,1);return}
+  else if(k==='myPw'){const my=S.ui.mypw||{};if((my.a||'')!==(my.b||'')){DB.busy=false;toast(T('ad_mismatch'));return}
+   const{error}=await sb.rpc('change_own_password',{p_password:my.a||''});if(error)throw error;S.ui.mypw={};DB.busy=false;toast(T('ad_myDone'),1);return}
   else if(k==='addMember'){const tm=S.ui.team;const{data,error}=await sb.rpc('add_member',{p_project:DB.project.id,p_email:toEmail(tm.email),p_role:tm.role||'editor'});
    if(error)throw error;S.ui.team={email:'',role:tm.role};await reloadMembers();DB.busy=false;toast(T(data==='added'?'tm_added':'tm_invited'),1);return}
  }catch(e){DB.busy=false;toast(errMsg(e));return}
