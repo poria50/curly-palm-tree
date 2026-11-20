@@ -299,6 +299,9 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
 .vd-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px;padding:4px 16px 16px;border-top:1px solid var(--line-2)}
 .modal-bg{position:fixed;inset:0;background:rgba(5,12,21,.5);z-index:50}
 .modal{position:fixed;z-index:51;top:50%;left:50%;transform:translate(-50%,-50%);width:min(520px,calc(100vw - 24px));max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal.wide{width:min(760px,calc(100vw - 24px))}
+.scard.dim{opacity:.6}
+.mini.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .modal form{display:flex;flex-direction:column;gap:14px}
 .modal .seg{align-self:flex-start}
 .sc-title{display:flex;align-items:center;gap:6px}.sc-title h3{margin:0}
@@ -455,6 +458,26 @@ sh_rev:['نرخ کرایه، همه انواع','Freight rates, all'],sh_revCat:
 sh_pct:['تغییر ٪','Change %'],
 p1:['بسیار کم (۱۰٪)','Very low (10%)'],
 ton:['تن','t'],
+nav_market:['بازار کامیون','Truck market'],
+mk_title:['بازار کامیون','Truck market'],mk_sub:['کامیون‌هایی را که در نروژ، اروپا یا جای دیگر پیدا می‌کنید اینجا جمع کنید. سامانه قیمت تمام‌شده در عمان را حساب می‌کند، آن‌ها را مقایسه می‌کند و با یک کلیک به بودجه می‌برد.','Collect the trucks you find in Norway, Europe or elsewhere. The system works out the landed cost in Oman, compares them and takes them into a budget with one click.'],
+mk_add:['افزودن کامیون','Add truck'],mk_edit:['ویرایش کامیون','Edit truck'],mk_none:['هنوز کامیونی اضافه نشده است.','No trucks added yet.'],mk_all:['همه','All'],mk_sort:['مرتب‌سازی','Sort by'],
+so_landed:['قیمت تمام‌شده','Landed cost'],so_per100k:['هزینه هر ۱۰۰ هزار کیلومتر باقیمانده','Cost per 100,000 km left'],so_newest:['جدیدترین','Newest'],so_votes:['بیشترین رأی','Most votes'],so_year:['سال ساخت','Model year'],
+mk_lifeKm:['عمر کل مورد انتظار (کیلومتر)','Expected total life (km)'],mk_kmYear:['کارکرد سالانه (کیلومتر)','Distance per year (km)'],mk_settingsNote:['این دو عدد برای تخمین عمر باقیمانده همه کامیون‌ها استفاده می‌شوند. نرخ ارزها از سناریوی فعال خوانده می‌شود.','These two numbers estimate the remaining life of every truck. Exchange rates come from the active scenario.'],
+mf_title:['عنوان','Title'],mf_titlePh:['مثلاً: Scania G460 6x4، ۲۰۲۲، نروژ','e.g. Scania G460 6x4, 2022, Norway'],mf_url:['لینک آگهی','Listing link'],mf_model:['مدل','Model'],mf_year:['سال ساخت','Model year'],mf_km:['کیلومتر','Mileage (km)'],
+mf_price:['قیمت کشنده','Tractor price'],mf_currency:['ارز','Currency'],mf_trailer:['قیمت تریلر (اگر جداست)','Trailer price (if separate)'],mf_ship:['حمل تا عمان (ریال)','Shipping to Oman (OMR)'],mf_duty:['گمرک ٪','Customs %'],mf_reg:['ثبت (ریال)','Registration (OMR)'],
+mf_country:['کشور','Country'],mf_seller:['فروشنده','Seller'],mf_axle:['محور','Axles'],mf_euro:['استاندارد آلایندگی','Emission class'],mf_gearbox:['گیربکس','Gearbox'],mf_hp:['قدرت (اسب بخار)','Power (hp)'],mf_notes:['یادداشت','Notes'],
+mf_badUrl:['لینک باید با http:// یا https:// شروع شود.','The link must start with http:// or https://.'],mf_needTitle:['عنوان را وارد کنید.','Enter a title.'],
+mm_price:['قیمت','Price'],mm_landed:['قیمت تمام‌شده در عمان','Landed in Oman'],mm_per100k:['هر ۱۰۰ هزار کیلومتر باقیمانده','Per 100,000 km left'],mm_remYears:['عمر باقیمانده','Remaining life'],mm_remKm:['کیلومتر باقیمانده','Km remaining'],mm_age:['سن','Age'],mm_check:['چک‌لیست','Checklist'],mm_votes:['رأی‌ها','Votes'],mm_open:['باز کردن آگهی','Open listing'],
+mk_details:['چک‌لیست و نظرات','Checklist and comments'],mk_commentPh:['نظر یا اطلاعات تازه…','Comment or new information…'],mk_send:['ارسال','Send'],mk_noComments:['هنوز نظری ثبت نشده.','No comments yet.'],
+mk_compare:['مقایسه','Compare'],mk_cmpTitle:['مقایسه کامیون‌ها','Truck comparison'],mk_cmpClear:['پاک کردن مقایسه','Clear comparison'],mk_cmpHint:['برای مقایسه، «مقایسه» را روی ۲ تا ۴ کامیون بزنید.','Tap “Compare” on 2 to 4 trucks to compare them.'],
+mk_use:['استفاده در بودجه','Use in budget'],mu_title:['استفاده در بودجه','Use in a budget'],mu_scn:['سناریو','Scenario'],mu_target:['نوع خودرو','Vehicle type'],mu_new:['نوع جدید با این کامیون','New type with this truck'],mu_qty:['تعداد','Quantity'],
+mu_fills:['این مقادیر در جزئیات خودرو پر می‌شود:','These values go into the vehicle details:'],mu_apply:['اعمال در بودجه','Apply to budget'],mu_none:['سناریویی ندارید که بتوانید ویرایش کنید. اول یک سناریو بسازید.','You have no scenario you can edit. Create a scenario first.'],
+mu_revNote:['درآمد هر کامیون را بعداً در صفحه مفروضات یا با مسیرها وارد کنید.','Enter revenue per truck afterwards under Assumptions or through Routes.'],
+mk_applied:[(t,s)=>`«${t}» در «${s}» اعمال شد.`,(t,s)=>`“${t}” applied to “${s}”.`],mk_saved:['کامیون ذخیره شد.','Truck saved.'],mk_by:[(n)=>`افزوده شده توسط ${n}`,(n)=>`Added by ${n}`],
+f_fxNOK:['نرخ کرون نروژ (ریال عمان برای هر کرون)','NOK rate (OMR per NOK)'],
+cs_interesting:['جالب','Interesting'],cs_contacted:['تماس گرفته شد','Contacted'],cs_inspected:['بازدید شد','Inspected'],cs_rejected:['رد شد','Rejected'],cs_bought:['خریداری شد','Bought'],
+ck_hub:['کاهنده توپی (هاب ریداکشن)','Hub reduction axles'],ck_retarder:['ریتاردر','Retarder'],ck_pto:['PTO و هیدرولیک کمپرسی','PTO and tipper hydraulics'],ck_euro:['استاندارد آلایندگی مناسب (AdBlue در صورت Euro 6)','Suitable emission class (AdBlue if Euro 6)'],
+ck_cooling:['خنک‌کاری و فیلتر گرد و غبار برای گرما','Cooling and dust filtration for heat'],ck_history:['سابقه سرویس کامل','Full service history'],ck_axle:['۶×۴ و ظرفیت محور تأیید شده','6x4 and axle capacity confirmed'],ck_inspect:['بازدید فنی انجام شد','Technical inspection done'],
 nm_title_new:['سناریوی جدید','New scenario'],nm_title_first:['اولین سناریوی شما','Your first scenario'],
 nm_name:['نام سناریو','Scenario name'],nm_ph:['مثلاً: معدن صحار، ۵ اسکانیای کارکرده','e.g. Sohar quarry, 5 used Scanias'],
 nm_help:['نامی بنویسید که بگوید این سناریو چه چیزی را آزمایش می‌کند: محل کار، تعداد کامیون یا فرض اصلی.','Write a name that says what this scenario tests: the site, the number of trucks or the key assumption.'],
@@ -611,12 +634,13 @@ function baseModel(){return{
 function blankModel(){const m=baseModel();m.cats=[];m.opex.forEach(o=>{o.v=0;o.src='guess'});m.fixed.forEach(o=>{o.v=0;o.src='guess'});m.inv.forEach(i=>{i.v=0;i.src='guess'});
  m.investors=[];m.risks=[];m.routes=[];m.drv.cost=0;Object.assign(m.fin,{revG:0,costG:0,mcapex:0,ramp:false});
  Object.assign(m.trip,{name:T('rt_newName'),pTrip:0,pKm:0,pTon:0,tons:0,loaded:0,empty:0,other:0,bonus:0});m.meta={'fin.diesel':{src:'quote'},'fin.tax':{src:'ver'},drv:{src:'guess'}};return m}
-function normModel(m){if(!m)return m;m.fin=m.fin||{};const F0=m.fin;if(F0.fxEUR==null)F0.fxEUR=0.42;if(F0.fxUSD==null)F0.fxUSD=0.3845;
- m.meta=m.meta||{};if(!m.meta['fin.fxEUR'])m.meta['fin.fxEUR']={src:'guess'};if(!m.meta['fin.fxUSD'])m.meta['fin.fxUSD']={src:'ver'};
+function normModel(m){if(!m)return m;m.fin=m.fin||{};const F0=m.fin;if(F0.fxEUR==null)F0.fxEUR=0.42;if(F0.fxUSD==null)F0.fxUSD=0.3845;if(F0.fxNOK==null)F0.fxNOK=0.036;
+ m.meta=m.meta||{};if(!m.meta['fin.fxEUR'])m.meta['fin.fxEUR']={src:'guess'};if(!m.meta['fin.fxUSD'])m.meta['fin.fxUSD']={src:'ver'};if(!m.meta['fin.fxNOK'])m.meta['fin.fxNOK']={src:'guess'};
  (m.cats||[]).forEach(c=>{const d={cur:'OMR',trailer:0,ship:0,duty:0,reg:0,cond:'new',age:0,life:F0.life||7,resid:F0.resid==null?20:F0.resid,trLife:F0.life||7,trResid:F0.resid==null?20:F0.resid,maintPct:0,tare:0,legal:0};for(const k in d)if(c[k]==null)c[k]=d[k]});
  (m.routes||[]).forEach(r=>{if(r.consL==null)r.consL=r.cons==null?40:r.cons;if(r.consE==null)r.consE=r.cons==null?30:r.cons;if(r.publicRoad==null)r.publicRoad=true});
  m.drv=Object.assign({mode:'ratio',ratio:1,count:30,shifts:1,truckDays:26,driverDays:22,absence:8,cost:400},m.drv||{});m.routes=m.routes||[];if(!m.fin.revSource)m.fin.revSource='topdown';return m}
-const fxOf=(c,f)=>c.cur==='EUR'?+f.fxEUR||0:c.cur==='USD'?+f.fxUSD||0:1;
+const fxCur=(cu,f)=>cu==='EUR'?+f.fxEUR||0:cu==='USD'?+f.fxUSD||0:cu==='NOK'?+f.fxNOK||0:1;
+const fxOf=(c,f)=>fxCur(c.cur,f);
 function landed(c,f){const fx=fxOf(c,f),tr=(+c.price||0)*fx,tl=(+c.trailer||0)*fx,cif=tr+tl+(+c.ship||0),duty=cif*(+c.duty||0)/100,total=cif+duty+(+c.reg||0),sh=tr+tl>0?tr/(tr+tl):1;
  return{cif,duty,reg:+c.reg||0,total,tractorBase:total*sh,trailerBase:total*(1-sh)}}
 function depOf(c,f,y,impPer){const L1=landed(c,f),q=+c.qty||0;const a=(base,life,res)=>life>0&&y<life?base*(1-(+res||0)/100)/life:0;
@@ -734,7 +758,7 @@ const SB_URL='https://szervxjdqdtonuuxcwlo.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6ZXJ2eGpkcWR0b251dXhjd2xvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ1ODMxOTAsImV4cCI6MjExMDE1OTE5MH0.Q0zE_kF43V8iEWqGp9-3yWthxwllHnFGo_mbd_NQXB8';
 const PREFS='oman-fleet-prefs-v1';
 let sb=null;
-const DB={logs:[],session:null,project:null,invites:[],status:'idle',dirty:new Set(),loading:true,busy:false,authMsg:'',toast:'',fatal:'',ch:null};
+const DB={cands:[],votes:[],comments:[],logs:[],session:null,project:null,invites:[],status:'idle',dirty:new Set(),loading:true,busy:false,authMsg:'',toast:'',fatal:'',ch:null};
 function demoScenarios(){
  const base=baseModel();
  const cons=baseModel();cons.cats.forEach(c=>c.rev=Math.round(c.rev*0.9));cons.fin.r1=30;cons.fin.r2=60;cons.fin.revG=3;
@@ -746,8 +770,8 @@ function demoScenarios(){
 }
 function loadPrefs(){let p={};try{p=JSON.parse(localStorage.getItem(PREFS)||'{}')||{}}catch(e){}
  return{lang:p.lang||'fa',theme:p.theme||'auto',cur:p.cur||null,user:null,scns:[],log:[],
-  ui:Object.assign({cmp:[],gs:{k:'irr',v:15,lever:'rev'},authMode:'in',project:null},p.ui||{},{sheet:false,vnote:{},auth:{},team:{email:'',role:'editor'},setup:{name:'Oman Fleet'},log:{},logf:{}})}}
-let saveT;function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(PREFS,JSON.stringify({lang:S.lang,theme:S.theme,cur:S.cur,ui:{cmp:S.ui.cmp,gs:S.ui.gs,project:S.ui.project,authMode:S.ui.authMode}}))}catch(e){}},250)}
+  ui:Object.assign({cmp:[],gs:{k:'irr',v:15,lever:'rev'},authMode:'in',project:null},p.ui||{},{mk:Object.assign({sort:'landed',status:'all',lifeKm:'1200000',kmYear:'100000'},(p.ui&&p.ui.mk)||{},{cmp:[]})},{cm:{},cOpen:{}},{sheet:false,vnote:{},auth:{},team:{email:'',role:'editor'},setup:{name:'Oman Fleet'},log:{},logf:{}})}}
+let saveT;function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(PREFS,JSON.stringify({lang:S.lang,theme:S.theme,cur:S.cur,ui:{cmp:S.ui.cmp,gs:S.ui.gs,project:S.ui.project,authMode:S.ui.authMode,mk:{sort:S.ui.mk.sort,status:S.ui.mk.status,lifeKm:S.ui.mk.lifeKm,kmYear:S.ui.mk.kmYear}}}))}catch(e){}},250)}
 const user=()=>usr(S.user);
 const myRole=()=>user().role;
 const isAdmin=()=>['owner','admin'].includes(myRole());
@@ -800,6 +824,7 @@ const ICONS={
  risks:'<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M12 8v5M12 16v.5"/>',
  routes:'<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/>',log:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>',
  team:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/>',signout:'<path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4M6 12h10"/>',
+ link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',market:'<path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
  edit:'<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
  more:'<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>',
  truck:'<path d="M2 6.5h11v9.5H2zM13 9.5h4.2l3.3 3.4V16H13z"/><circle cx="6" cy="17.5" r="1.9"/><circle cx="16.5" cy="17.5" r="1.9"/>',
@@ -915,7 +940,7 @@ function vehPanel(){const m=M(),f=m.fin,ce=canEdit();if(!m.cats.length)return ''
   return `<details class="vd" data-cat="${c.id}" ${(S.ui.open||{})[c.id]?'open':''}><summary><span class="row" style="gap:10px"><b>${esc(L(c))}</b><span class="pill ${c.cond==='used'?'warn':''}">${T('cond_'+(c.cond||'new'))}</span><span class="muted small">${T('cd_landed')}: ${moneyT(L1.total)}${cur!=='OMR'?` (${cur})`:''}</span></span></summary>
   <div class="vd-grid">
    <div><h3 class="sub">${T('cd_buy')}</h3><div class="seg" style="margin-bottom:12px">${seg}</div>
-    <div class="fields">${c.cond==='used'?field(T('cd_age'),numIn(P+'.age',1)):''}${field(T('cd_cur'),selIn(P+'.cur',[['OMR','OMR'],['EUR','EUR'],['USD','USD']]))}${field(T('cd_price'),numIn(P+'.price'))}${field(T('cd_trailer'),numIn(P+'.trailer'))}${field(T('cd_ship'),numIn(P+'.ship'))}${field(T('cd_duty'),numIn(P+'.duty',1))}${field(T('cd_reg'),numIn(P+'.reg'))}</div>
+    <div class="fields">${c.cond==='used'?field(T('cd_age'),numIn(P+'.age',1)):''}${field(T('cd_cur'),selIn(P+'.cur',[['OMR','OMR'],['EUR','EUR'],['USD','USD'],['NOK','NOK']]))}${field(T('cd_price'),numIn(P+'.price'))}${field(T('cd_trailer'),numIn(P+'.trailer'))}${field(T('cd_ship'),numIn(P+'.ship'))}${field(T('cd_duty'),numIn(P+'.duty',1))}${field(T('cd_reg'),numIn(P+'.reg'))}</div>
     <div class="tscroll" style="margin-top:12px"><table class="tbl"><tbody>${row('cd_cif',fmt(L1.cif))}${row('cd_dutyAmt',fmt(L1.duty))}${row('cd_regAmt',fmt(L1.reg))}${row('cd_landed',fmt(L1.total),'key')}${row('cd_fleetCost',fmt(L1.total*(+c.qty||0)),'sub')}</tbody></table></div></div>
    <div><h3 class="sub">${T('cd_life')}</h3><div class="fields">${field(T('cd_tLife'),numIn(P+'.life',1))}${field(T('cd_tResid'),numIn(P+'.resid',1))}${field(T('cd_trLife'),numIn(P+'.trLife',1))}${field(T('cd_trResid'),numIn(P+'.trResid',1))}${field(T('cd_maint'),numIn(P+'.maintPct',1))}</div>
     <p class="note">${T('cd_maintHint')}</p><div class="tscroll"><table class="tbl"><tbody>${row('cd_depY',fmt(dep1),'key')}</tbody></table></div></div>
@@ -955,7 +980,7 @@ function vAssumptions(){
  <tr class="sub"><td class="lbl">${T('invTrucks')}</td><td><span class="pill">${T('kind_calc')}</span></td><td></td><td class="n">${fmt(r.invLines[0].v)}</td><td></td><td></td><td></td></tr>${invRows}
  <tr class="tot"><td>${T('total')}</td><td></td><td></td><td class="n">${fmt(r.invest)}</td><td colspan="3"></td></tr></tbody></table></div>
  ${ce?`<div class="row" style="margin-top:12px"><button class="btn" data-act="addInv">${ic('plus')}${T('addInv')}</button></div>`:''}</section>
- <section class="panel"><h2>${T('sec_fin')}</h2><div class="fields">${F('diesel',3)}${F('fxEUR',4)}${F('fxUSD',4)}${F('revG')}${F('costG')}${F('tax')}${F('life',0)}${F('resid')}${F('mcapex',0)}${F('disc')}${F('start',0)}</div>
+ <section class="panel"><h2>${T('sec_fin')}</h2><div class="fields">${F('diesel',3)}${F('fxEUR',4)}${F('fxUSD',4)}${F('fxNOK',4)}${F('revG')}${F('costG')}${F('tax')}${F('life',0)}${F('resid')}${F('mcapex',0)}${F('disc')}${F('start',0)}</div>
  <label class="check" style="margin-top:16px"><input type="checkbox" data-bind="fin.lossCF" ${m.fin.lossCF?'checked':''} ${dis()}>${T('f_lossCF')}</label></section>
  <section class="panel"><h2>${T('sec_ramp')}</h2><label class="check" style="margin-bottom:14px"><input type="checkbox" data-bind="fin.ramp" ${m.fin.ramp?'checked':''} ${dis()}>${T('f_ramp')}</label>
  <div class="fields">${F('r1',0)}${F('r2',0)}</div><p class="note">${T('rampNote')}</p></section></div>`;
@@ -1274,7 +1299,85 @@ function vLog(){const m=M(),ce=canCreate(),u=S.ui.log,lf=S.ui.logf;
 function prefillTruck(){const u=S.ui.log,k=(u.truck||'').trim().toLowerCase();if(!k)return;const last=DB.logs.filter(l=>(l.truck||'').trim().toLowerCase()===k).sort((a,b)=>a.started_at<b.started_at?1:-1)[0];
  if(last){u.o1=String(+last.odo_end);if(!u.driver)u.driver=last.driver||'';if(!u.route&&last.route_id&&M().routes.some(r=>r.id===last.route_id)){u.route=last.route_id;prefillRoute()}}}
 function prefillRoute(){const u=S.ui.log,rt=M().routes.find(r=>r.id===u.route);if(!rt)return;const x=calcRoute(rt,M().fin);u.price=String(Number(x.rev.toFixed(3)));u.tons=String(rt.tons||'')}
-const VIEWS={dashboard:vDashboard,assumptions:vAssumptions,trip:vTrip,routes:vRoutes,log:vLog,forecast:vForecast,scenarios:vScenarios,compare:vCompare,investors:vInvestors,risks:vRisks,team:vTeam};
+const CHECK=['hub','retarder','pto','euro','cooling','history','axle','inspect'];
+const CSTAT=['interesting','contacted','inspected','rejected','bought'];
+const safeUrl=u=>/^https?:\/\//i.test(u||'')?u:'';
+function candCalc(c){const f=(cur()&&M().fin)||{fxEUR:0.42,fxUSD:0.3845,fxNOK:0.036};const fx=fxCur(c.currency,f);
+ const cif=((+c.price||0)+(+c.trailer_price||0))*fx+(+c.ship||0),duty=cif*(+c.duty||0)/100,landed=cif+duty+(+c.reg||0);
+ const age=c.year?Math.max(0,new Date().getFullYear()-(+c.year)):null,lk=+S.ui.mk.lifeKm||0,ky=+S.ui.mk.kmYear||0;
+ const remKm=c.km!=null&&c.km!==''?Math.max(0,lk-(+c.km)):null,per100k=remKm>0?landed/(remKm/100000):null,remYears=remKm!=null&&ky>0?remKm/ky:null;
+ const ck=CHECK.filter(k=>c.checklist&&c.checklist[k]).length,v=DB.votes.filter(x=>x.candidate_id===c.id),up=v.filter(x=>x.vote>0).length;
+ return{fx,cif,duty,landed,age,remKm,per100k,remYears,ck,up,down:v.length-up,my:(v.find(x=>x.user_id===S.user)||{}).vote||0,comments:DB.comments.filter(x=>x.candidate_id===c.id)}}
+function vMarket(){const mk=S.ui.mk,ce=canCreate();
+ let list=DB.cands.filter(c=>mk.status==='all'||c.status===mk.status).map(c=>({c,x:candCalc(c)}));
+ const nl=(a,b,dir)=>a==null?1:b==null?-1:dir*(a-b);
+ list.sort((A,B)=>mk.sort==='per100k'?nl(A.x.per100k,B.x.per100k,1):mk.sort==='newest'?(A.c.created_at<B.c.created_at?1:-1):mk.sort==='votes'?(B.x.up-B.x.down)-(A.x.up-A.x.down):mk.sort==='year'?nl(A.c.year,B.c.year,-1):A.x.landed-B.x.landed);
+ const chips=['all',...CSTAT].map(k=>{const n=k==='all'?DB.cands.length:DB.cands.filter(c=>c.status===k).length;return `<button class="chip ${mk.status===k?'on':''}" data-act="mkStatus" data-arg="${k}">${k==='all'?T('mk_all'):T('cs_'+k)} <span class="muted small">${fmt(n)}</span></button>`}).join('');
+ const sortSel=`<select class="sel" data-ui="mk.sort" data-live="1">${['landed','per100k','newest','votes','year'].map(k=>`<option value="${k}" ${mk.sort===k?'selected':''}>${T('so_'+k)}</option>`).join('')}</select>`;
+ const cards=list.map(({c,x})=>{const own=c.created_by===S.user,inCmp=mk.cmp.includes(c.id),url=safeUrl(c.url);
+  const meta=[c.model,c.year?fmt(c.year).replace(/٬|,/g,''):'',c.km!=null?`${fmt(c.km)} km`:'',c.country,c.seller].filter(Boolean).map(esc).join('، '.replace('،',rtl()?'،':','));
+  const tags=[c.axle,c.euro,c.gearbox,c.hp?`${fmt(c.hp)} hp`:''].filter(Boolean).map(t=>`<span class="pill">${esc(t)}</span>`).join('');
+  const st=ce?`<select class="sel" data-ctl="cstatus" data-id="${c.id}" style="padding-top:4px;padding-bottom:4px">${CSTAT.map(k=>`<option value="${k}" ${c.status===k?'selected':''}>${T('cs_'+k)}</option>`).join('')}</select>`:`<span class="pill">${T('cs_'+c.status)}</span>`;
+  const cm=x.comments.map(k=>`<div class="log-i" style="padding:7px 0">${avatar(k.user_id,1)}<div style="flex:1"><div>${esc(k.body)}</div><div class="t">${esc(uname(k.user_id))}، ${dt(Date.parse(k.created_at))}</div></div>${k.user_id===S.user||isAdmin()?`<button class="btn ghost" data-act="cmDel" data-arg="${k.id}">${ic('trash')}</button>`:''}</div>`).join('');
+  return `<article class="scard ${c.status==='rejected'?'dim':''} ${inCmp?'cur':''}">
+   <div class="row">${st}<span class="spacer"></span><button class="chip ${inCmp?'on':''}" data-act="ccmp" data-arg="${c.id}">${T('mk_compare')}</button></div>
+   <div class="sc-title"><h3>${esc(c.title)}</h3>${url?`<a class="btn ghost" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${T('mm_open')}" style="padding:4px 6px">${ic('link')}</a>`:''}</div>
+   ${meta?`<div class="small muted">${meta}</div>`:''}${tags?`<div class="row" style="gap:6px">${tags}</div>`:''}
+   <div class="mini two"><div><span>${T('mm_price')}</span><b class="tn">${fmt(c.price)} <small class="muted">${esc(c.currency)}</small></b></div><div><span>${T('mm_landed')}</span><b class="tn">${fmt(x.landed)}</b></div><div><span>${T('mm_per100k')}</span><b class="tn">${x.per100k==null?'—':fmt(x.per100k)}</b></div><div><span>${T('mm_remYears')}</span><b>${x.remYears==null?'—':`${fmt(x.remYears,1)} ${T('years')}`}</b></div></div>
+   <div class="row small"><button class="chip ${x.my>0?'on':''}" data-act="vote" data-arg="${c.id}" data-v="1" style="padding:3px 10px">▲ ${fmt(x.up)}</button><button class="chip ${x.my<0?'on':''}" data-act="vote" data-arg="${c.id}" data-v="-1" style="padding:3px 10px">▼ ${fmt(x.down)}</button><span class="spacer"></span><span class="muted">${T('mm_check')}: ${fmt(x.ck)}/${fmt(CHECK.length)}</span></div>
+   ${c.notes?`<div class="small">${esc(c.notes)}</div>`:''}
+   <details class="vd" data-cand="${c.id}" ${S.ui.cOpen[c.id]?'open':''}><summary><span class="small">${T('mk_details')} (${fmt(x.comments.length)})</span></summary><div style="padding:6px 14px 14px">
+    <div class="stack" style="gap:6px;margin-bottom:12px">${CHECK.map(k=>`<label class="check small"><input type="checkbox" data-ctl="cchk" data-id="${c.id}" data-k="${k}" ${c.checklist&&c.checklist[k]?'checked':''} ${ce?'':'disabled'}>${T('ck_'+k)}</label>`).join('')}</div>
+    <div class="log">${cm||`<span class="small muted">${T('mk_noComments')}</span>`}</div>
+    <form data-form="comment" data-id="${c.id}" class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in txt" data-ui="cm.${c.id}" value="${esc(S.ui.cm[c.id]||'')}" placeholder="${esc(T('mk_commentPh'))}" maxlength="2000"><button class="btn" type="submit">${T('mk_send')}</button></form>
+   </div></details>
+   <div class="row">${ce?`<button class="btn pri" data-act="cUse" data-arg="${c.id}">${ic('assumptions')}${T('mk_use')}</button><button class="btn" data-act="cEdit" data-arg="${c.id}">${ic('edit')}</button>`:''}${own||isAdmin()?`<button class="btn ghost danger" data-act="cDel" data-arg="${c.id}">${ic('trash')}</button>`:''}<span class="spacer"></span><span class="small muted">${avatar(c.created_by,1)} ${dt(Date.parse(c.created_at),1)}</span></div>
+  </article>`}).join('');
+ const sel=mk.cmp.map(id=>DB.cands.find(c=>c.id===id)).filter(Boolean);let cmp='';
+ if(sel.length>=2){const xs=sel.map(candCalc);
+  const rows=[['mm_price',(c,x)=>`${fmt(c.price)} ${esc(c.currency)}`,null],['mm_landed',(c,x)=>x.landed,'lo'],['mf_year',(c,x)=>c.year,'hi'],['mf_km',(c,x)=>c.km,'lo'],['mm_remKm',(c,x)=>x.remKm,'hi'],['mm_per100k',(c,x)=>x.per100k,'lo'],['mm_remYears',(c,x)=>x.remYears,'hi'],['mf_hp',(c,x)=>c.hp,'hi'],['mf_axle',(c,x)=>esc(c.axle||'—'),null],['mf_euro',(c,x)=>esc(c.euro||'—'),null],['mf_gearbox',(c,x)=>esc(c.gearbox||'—'),null],['mm_check',(c,x)=>x.ck,'hi'],['mm_votes',(c,x)=>x.up-x.down,'hi'],['mf_country',(c,x)=>esc(c.country||'—'),null]];
+  cmp=`<section class="panel" style="margin-bottom:18px"><div class="row" style="margin-bottom:10px"><h2 style="margin:0">${T('mk_cmpTitle')}</h2><span class="spacer"></span><button class="btn ghost" data-act="cmpClear">${T('mk_cmpClear')}</button></div><div class="tscroll"><table class="tbl"><thead><tr><th></th>${sel.map(c=>`<th class="n">${esc(c.title)}</th>`).join('')}</tr></thead><tbody>
+  ${rows.map(([k,g,b])=>{const vals=sel.map((c,i)=>g(c,xs[i]));let best=-1;if(b){const ok=vals.map((v,i)=>[v,i]).filter(([v])=>typeof v==='number'&&isFinite(v));if(ok.length>1)best=ok.reduce((a,c2)=>(b==='hi'?c2[0]>a[0]:c2[0]<a[0])?c2:a)[1]}
+   return `<tr><td class="lbl">${T(k)}</td>${vals.map((v,i)=>`<td class="n ${i===best?'best':''}">${typeof v==='number'?(k==='mm_remYears'?fmt(v,1):k==='mf_year'?String(fmt(v)).replace(/٬|,/g,''):fmt(v)):v==null?'—':v}</td>`).join('')}</tr>`}).join('')}
+  </tbody></table></div></section>`}
+ return head(T('mk_title'),T('mk_sub'))+`
+ <div class="row" style="margin-bottom:12px">${ce?`<button class="btn pri" data-act="cAdd">${ic('plus')}${T('mk_add')}</button>`:''}<span class="spacer"></span><label class="row small muted" style="gap:8px">${T('mk_sort')} ${sortSel}</label></div>
+ <div class="chips">${chips}</div>
+ ${cmp||(DB.cands.length>1?`<p class="small muted" style="margin-top:-6px">${T('mk_cmpHint')}</p>`:'')}
+ <div class="scn">${cards||`<div class="panel muted">${T('mk_none')}</div>`}</div>
+ <section class="panel" style="margin-top:18px"><div class="fields">${field(T('mk_lifeKm'),`<input class="in" inputmode="decimal" dir="ltr" data-ui="mk.lifeKm" data-live="1" value="${esc(mk.lifeKm)}">`)}${field(T('mk_kmYear'),`<input class="in" inputmode="decimal" dir="ltr" data-ui="mk.kmYear" data-live="1" value="${esc(mk.kmYear)}">`)}</div><p class="note">${T('mk_settingsNote')}</p></section>`;
+}
+const CFIELDS=['title','url','model','year','km','price','currency','trailer_price','ship','duty','reg','country','seller','axle','euro','gearbox','hp','notes'];
+function cdlgHtml(){const d=S.ui.cdlg;if(!d)return '';
+ const tx=(k,ph='',lt=0)=>field(T('mf_'+(k==='trailer_price'?'trailer':k)),`<input class="in${lt?'':' txt'}" data-ui="cdlg.${k}" ${lt?'inputmode="decimal" dir="ltr" data-live="1"':''} ${k==='url'?'dir="ltr"':''} value="${esc(d[k]??'')}" ${ph?`placeholder="${esc(ph)}"`:''}>`);
+ const pv=candCalc(Object.assign({},d,{id:'_',checklist:{}}));
+ return `<div class="modal-bg" data-act="cdlgClose"></div><div class="modal wide" role="dialog" aria-modal="true"><form data-form="cand">
+  <h2 style="font-size:18px">${T(d.id?'mk_edit':'mk_add')}</h2>
+  <div class="fields">${tx('title',T('mf_titlePh'))}${tx('url','https://')}</div>
+  <div class="fields">${tx('model')}${tx('year','',1)}${tx('km','',1)}${tx('hp','',1)}${tx('axle','6x4')}${tx('euro','Euro 5')}${tx('gearbox')}${tx('country')}${tx('seller')}</div>
+  <div class="fields">${tx('price','',1)}${field(T('mf_currency'),`<select class="sel" data-ui="cdlg.currency" data-live="1" style="max-width:none">${['EUR','NOK','USD','OMR'].map(k=>`<option ${d.currency===k?'selected':''}>${k}</option>`).join('')}</select>`)}${tx('trailer_price','',1)}${tx('ship','',1)}${tx('duty','',1)}${tx('reg','',1)}</div>
+  ${field(T('mf_notes'),`<input class="in txt" data-ui="cdlg.notes" value="${esc(d.notes||'')}">`)}
+  <div class="mini"><div><span>${T('mm_landed')}</span><b class="tn">${fmt(pv.landed)}</b></div><div><span>${T('mm_per100k')}</span><b class="tn">${pv.per100k==null?'—':fmt(pv.per100k)}</b></div><div><span>${T('mm_remYears')}</span><b>${pv.remYears==null?'—':fmt(pv.remYears,1)}</b></div><div><span>${T('cd_dutyAmt')}</span><b class="tn">${fmt(pv.duty)}</b></div></div>
+  ${d.err?`<div class="warn-i bad">${ic('warn')}<span>${esc(d.err)}</span></div>`:''}
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-act="cdlgClose">${T('cancel')}</button><button type="submit" class="btn pri" ${DB.busy?'disabled':''}>${ic('check')}${T('save')}</button></div>
+ </form></div>`}
+function udlgHtml(){const d=S.ui.udlg;if(!d)return '';const c=DB.cands.find(x=>x.id===d.cid);if(!c)return '';
+ const eds=S.scns.filter(s=>canEdit(s)&&(s.vis!=='private'||s.owner===S.user));
+ if(!eds.length)return `<div class="modal-bg" data-act="udlgClose"></div><div class="modal"><h2>${T('mu_title')}</h2><p>${T('mu_none')}</p><div class="row" style="justify-content:flex-end"><button class="btn" data-act="udlgClose">${T('cancel')}</button></div></div>`;
+ if(!eds.some(s=>s.id===d.scn))d.scn=eds[0].id;const sc=eds.find(s=>s.id===d.scn);normModel(sc.model);
+ const x=candCalc(c),life=x.remYears!=null?Math.max(1,Math.round(x.remYears*10)/10):null;
+ const li=(k,v)=>`<tr><td>${T(k)}</td><td class="n">${v}</td></tr>`;
+ return `<div class="modal-bg" data-act="udlgClose"></div><div class="modal" role="dialog" aria-modal="true"><form data-form="useCand">
+  <h2 style="font-size:18px">${T('mu_title')}: ${esc(c.title)}</h2>
+  ${field(T('mu_scn'),`<select class="sel" data-ui="udlg.scn" data-live="1" style="max-width:none">${eds.map(s=>`<option value="${s.id}" ${s.id===d.scn?'selected':''}>${esc(L(s.name))}</option>`).join('')}</select>`)}
+  ${field(T('mu_target'),`<select class="sel" data-ui="udlg.target" data-live="1" style="max-width:none"><option value="new" ${d.target==='new'?'selected':''}>${T('mu_new')}</option>${sc.model.cats.map(k=>`<option value="${k.id}" ${d.target===k.id?'selected':''}>${esc(L(k))}</option>`).join('')}</select>`)}
+  ${d.target==='new'?field(T('mu_qty'),`<input class="in" inputmode="decimal" dir="ltr" data-ui="udlg.qty" value="${esc(d.qty||'1')}">`):''}
+  <p class="small muted" style="margin:0">${T('mu_fills')}</p>
+  <div class="tscroll"><table class="tbl"><tbody>${li('cd_price',`${fmt(c.price)} ${esc(c.currency)}`)}${li('cd_trailer',`${fmt(c.trailer_price)} ${esc(c.currency)}`)}${li('cd_ship',fmt(c.ship))}${li('cd_duty',`${fmt(c.duty,1)}٪`.replace('٪',rtl()?'٪':'%'))}${li('cd_reg',fmt(c.reg))}${li('cd_cond',T(x.age>0||(+c.km||0)>5000?'cond_used':'cond_new'))}${x.age!=null?li('cd_age',fmt(x.age)):''}${life!=null?li('cd_tLife',fmt(life,1)):''}${li('cd_landed',`<b>${fmt(x.landed)}</b>`)}</tbody></table></div>
+  ${d.target==='new'?`<p class="note" style="margin:0">${T('mu_revNote')}</p>`:''}
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" data-act="udlgClose">${T('cancel')}</button><button type="submit" class="btn pri">${ic('check')}${T('mu_apply')}</button></div>
+ </form></div>`}
+const VIEWS={dashboard:vDashboard,assumptions:vAssumptions,trip:vTrip,routes:vRoutes,market:vMarket,log:vLog,forecast:vForecast,scenarios:vScenarios,compare:vCompare,investors:vInvestors,risks:vRisks,team:vTeam};
 const NAV=Object.keys(VIEWS);
 const view=()=>{const h=location.hash.slice(1);return VIEWS[h]?h:h==='drivers-sec'?'assumptions':'dashboard'};
 
@@ -1298,7 +1401,7 @@ function shell(){
     <div class="me">${avatar(u.id)}<div class="who"><b>${esc(u.name)}</b><span>${T('role_'+u.role)}</span></div><button class="icon-btn theme-btn" data-act="signOut" title="${esc(T('signOut'))}" aria-label="${esc(T('signOut'))}">${ic('signout')}</button></div>
    </div>
   </header>
-  ${dlgHtml()}<main class="main">${DB.toast?`<div class="banner ${DB.toastOk?'info':''}">${ic(DB.toastOk?'check':'warn')}<span>${esc(DB.toast)}</span></div>`:''}${lockBanner()}${VIEWS[v]()}</main>
+  ${dlgHtml()}${cdlgHtml()}${udlgHtml()}<main class="main">${DB.toast?`<div class="banner ${DB.toastOk?'info':''}">${ic(DB.toastOk?'check':'warn')}<span>${esc(DB.toast)}</span></div>`:''}${lockBanner()}${VIEWS[v]()}</main>
  </div></div>
  <nav class="bnav">${bn.map(n=>`<a href="#${n}" class="${v===n?'on':''}">${ic(n)}<span>${T('bn_'+n)}</span></a>`).join('')}<button class="${moreOn?'on':''}" data-act="sheet">${ic('more')}<span>${T('more')}</span></button></nav>
  ${S.ui.sheet?`<div class="sheet-wrap"><div class="sheet-bg" data-act="sheetClose"></div><div class="sheet"><div class="grab"></div>${NAV.filter(n=>!bn.includes(n)).map(n=>`<a href="#${n}" class="${v===n?'on':''}">${ic(n)}<span>${T('nav_'+n)}</span></a>`).join('')}
@@ -1318,6 +1421,7 @@ function render(){
  else if(!cur())html=vEmpty();
  else{R=calc(M());TR=calcTrip(M(),R);html=shell()}
  document.getElementById('root').innerHTML=html;
+ if(S.ui.cdlg&&S.ui.cdlg.focus){S.ui.cdlg.focus=false;keep=null;const el=document.querySelector('[data-ui="cdlg.title"]');if(el)el.focus()}
  if(S.ui.dlg&&S.ui.dlg.focus){S.ui.dlg.focus=false;keep=null;const el=document.querySelector('[data-ui="dlg.name"]');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length)}}
  if(keep){const el=document.querySelector(keep.b?`[data-bind="${keep.b}"]`:`[data-ui="${keep.u}"]`);if(el){el.value=keep.v;el.focus();try{el.setSelectionRange(keep.s,keep.e)}catch(e){}}}
 }
@@ -1341,15 +1445,22 @@ async function loadProject(){const pid=DB.project.id;
  const[sc,lg]=await Promise.all([sb.from('scenarios').select('*').eq('project_id',pid).eq('archived',false).order('created_at'),sb.from('activity_log').select('*').eq('project_id',pid).order('created_at',{ascending:false}).limit(150)]);
  if(sc.error)toast(sc.error.message);
  S.scns=(sc.data||[]).map(rowToScn);S.log=(lg.data||[]).map(rowToLog);
+ await loadMarket(pid);
  const tl=await sb.from('trip_logs').select('*').eq('project_id',pid).order('started_at',{ascending:false}).limit(2000);DB.logs=tl.data||[];
  if(S.scns.length){const{data:v}=await sb.from('scenario_versions').select('scenario_id,version_no,note,created_by,created_at').in('scenario_id',S.scns.map(s=>s.id)).order('version_no');
   (v||[]).forEach(r=>{const s=S.scns.find(x=>x.id===r.scenario_id);if(s)s.versions.push({n:r.version_no,at:Date.parse(r.created_at),by:r.created_by,note:r.note})})}
 }
+async function loadMarket(pid){const c=await sb.from('truck_candidates').select('*').eq('project_id',pid).order('created_at',{ascending:false});DB.cands=c.data||[];
+ if(DB.cands.length){const ids=DB.cands.map(x=>x.id);const[v,k]=await Promise.all([sb.from('candidate_votes').select('*').in('candidate_id',ids),sb.from('candidate_comments').select('*').in('candidate_id',ids).order('created_at')]);DB.votes=v.data||[];DB.comments=k.data||[]}else{DB.votes=[];DB.comments=[]}}
+function rtMerge(arr,p,same){if(p.eventType==='DELETE'){const o=p.old||{};return arr.filter(x=>!same(x,o))}const n=p.new;if(!n)return arr;const i=arr.findIndex(x=>same(x,n));if(i>=0)arr[i]=n;else arr.push(n);return arr}
 function subscribe(){if(DB.ch)sb.removeChannel(DB.ch);const pid=DB.project.id;
  DB.ch=sb.channel('project-'+pid)
   .on('postgres_changes',{event:'*',schema:'public',table:'scenarios',filter:`project_id=eq.${pid}`},onScn)
   .on('postgres_changes',{event:'INSERT',schema:'public',table:'activity_log',filter:`project_id=eq.${pid}`},p=>{const r=p.new;if(!r||r.user_id===S.user)return;S.log.unshift(rowToLog(r));render()})
   .on('postgres_changes',{event:'*',schema:'public',table:'project_members',filter:`project_id=eq.${pid}`},()=>reloadMembers().then(render))
+  .on('postgres_changes',{event:'*',schema:'public',table:'truck_candidates',filter:`project_id=eq.${pid}`},p=>{DB.cands=rtMerge(DB.cands,p,(a,b)=>a.id===b.id);DB.cands.sort((a,b)=>a.created_at<b.created_at?1:-1);render()})
+  .on('postgres_changes',{event:'*',schema:'public',table:'candidate_votes'},p=>{DB.votes=rtMerge(DB.votes,p,(a,b)=>a.candidate_id===b.candidate_id&&a.user_id===b.user_id);render()})
+  .on('postgres_changes',{event:'*',schema:'public',table:'candidate_comments'},p=>{DB.comments=rtMerge(DB.comments,p,(a,b)=>a.id===b.id);render()})
   .on('postgres_changes',{event:'*',schema:'public',table:'trip_logs',filter:`project_id=eq.${pid}`},p=>{if(p.eventType==='DELETE'){DB.logs=DB.logs.filter(l=>l.id!==(p.old&&p.old.id))}else if(p.new){const i=DB.logs.findIndex(l=>l.id===p.new.id);if(i>=0)DB.logs[i]=p.new;else DB.logs.unshift(p.new)}render()})
   .subscribe();}
 function onScn(p){
@@ -1391,6 +1502,19 @@ async function onAct(a,b){
   case 'dup':openDlg({start:'copy',src:arg});return;
   case 'newScn':openDlg({start:'copy',src:(S.scns.find(s=>s.vis==='official')||visible()[0]||{}).id||''});return;
   case 'dlgClose':S.ui.dlg=null;break;
+  case 'mkStatus':S.ui.mk.status=arg;break;
+  case 'ccmp':{const l=S.ui.mk.cmp;if(l.includes(arg))S.ui.mk.cmp=l.filter(x=>x!==arg);else if(l.length<4)l.push(arg);break}
+  case 'cmpClear':S.ui.mk.cmp=[];break;
+  case 'cAdd':{const last=DB.cands[0]||{};S.ui.cdlg={title:'',url:'',model:'',year:'',km:'',price:'',currency:last.currency||'EUR',trailer_price:'',ship:last.ship!=null?String(last.ship):'',duty:'5',reg:last.reg!=null?String(last.reg):'',country:last.country||'',seller:'',axle:'6x4',euro:'',gearbox:'',hp:'',notes:'',focus:true};break}
+  case 'cEdit':{const c=DB.cands.find(x=>x.id===arg);if(!c)return;S.ui.cdlg=Object.assign({id:c.id,focus:true},Object.fromEntries(CFIELDS.map(k=>[k,c[k]==null?'':String(c[k])])));break}
+  case 'cdlgClose':S.ui.cdlg=null;break;
+  case 'cDel':{const{error}=await sb.from('truck_candidates').delete().eq('id',arg);if(error)return toast(errMsg(error));DB.cands=DB.cands.filter(x=>x.id!==arg);S.ui.mk.cmp=S.ui.mk.cmp.filter(x=>x!==arg);break}
+  case 'vote':{const v=+b.dataset.v,mine=DB.votes.find(x=>x.candidate_id===arg&&x.user_id===S.user);
+   if(mine&&mine.vote===v){const{error}=await sb.from('candidate_votes').delete().eq('candidate_id',arg).eq('user_id',S.user);if(error)return toast(errMsg(error));DB.votes=DB.votes.filter(x=>x!==mine)}
+   else{const{data,error}=await sb.from('candidate_votes').upsert({candidate_id:arg,user_id:S.user,vote:v}).select().single();if(error)return toast(errMsg(error));DB.votes=DB.votes.filter(x=>!(x.candidate_id===arg&&x.user_id===S.user));DB.votes.push(data)}break}
+  case 'cmDel':{const{error}=await sb.from('candidate_comments').delete().eq('id',arg);if(error)return toast(errMsg(error));DB.comments=DB.comments.filter(x=>x.id!==arg);break}
+  case 'cUse':{const eds=S.scns.filter(s=>canEdit(s));S.ui.udlg={cid:arg,scn:(eds.find(s=>s.id===S.cur)||eds[0]||{}).id||'',target:'new',qty:'1'};break}
+  case 'udlgClose':S.ui.udlg=null;break;
   case 'dlgStart':S.ui.dlg.start=arg;if(arg==='copy'&&!S.ui.dlg.src)S.ui.dlg.src=(S.scns.find(s=>s.id===S.cur)||visible()[0]||{}).id||'';S.ui.dlg.err='';break;
   case 'dlgSug':S.ui.dlg.name=arg;S.ui.dlg.err='';S.ui.dlg.focus=true;break;
   case 'renStart':{const s=S.scns.find(x=>x.id===arg);S.ui.ren={id:arg,name:L(s.name)};break}
@@ -1439,6 +1563,22 @@ async function onSubmit(form,sub){
    if(error)DB.authMsg=errMsg(error);else{const r2=await sb.auth.signInWithPassword({email:toEmail(a.email),password:a.pw||''});if(r2.error)DB.authMsg=errMsg(r2.error);else{S.ui.auth={};S.ui.authMode='in'}}}
   else if(k==='createProject'){const{data,error}=await sb.rpc('create_project',{p_name:S.ui.setup.name||'Oman Fleet'});if(error)throw error;S.ui.project=data;
    DB.project={id:data,name:S.ui.setup.name};await reloadMembers();if(sub&&sub.dataset.mode==='demo')await seedDemo(data);else{const r2=await sb.from('scenarios').insert({project_id:data,name:T('blank_name'),notes:'',visibility:'official',model:blankModel()});if(r2.error)throw r2.error}DB.busy=false;await loadAll();return}
+  else if(k==='cand'){const d=S.ui.cdlg;const t=(d.title||'').trim();if(t.length<2){d.err=T('mf_needTitle');DB.busy=false;render();return}
+   const u=(d.url||'').trim();if(u&&!/^https?:\/\//i.test(u)){d.err=T('mf_badUrl');DB.busy=false;render();return}
+   const n=v=>{const x=parseNum(v);return v===''||v==null||x===undefined?null:x};
+   const row={title:t,url:u||null,model:(d.model||'').trim(),year:n(d.year)!=null?Math.round(n(d.year)):null,km:n(d.km),price:n(d.price)||0,currency:d.currency||'EUR',trailer_price:n(d.trailer_price)||0,ship:n(d.ship)||0,duty:n(d.duty)==null?5:n(d.duty),reg:n(d.reg)||0,country:(d.country||'').trim(),seller:(d.seller||'').trim(),axle:(d.axle||'').trim(),euro:(d.euro||'').trim(),gearbox:(d.gearbox||'').trim(),hp:n(d.hp)!=null?Math.round(n(d.hp)):null,notes:(d.notes||'').trim()};
+   const q=d.id?sb.from('truck_candidates').update(row).eq('id',d.id).select().single():sb.from('truck_candidates').insert(Object.assign({project_id:DB.project.id},row)).select().single();
+   const{data,error}=await q;if(error){d.err=errMsg(error);DB.busy=false;render();return}
+   DB.cands=rtMerge(DB.cands,{eventType:'UPSERT',new:data},(a,b)=>a.id===b.id);DB.cands.sort((a,b)=>a.created_at<b.created_at?1:-1);S.ui.cdlg=null;DB.busy=false;toast(T('mk_saved'),1);return}
+  else if(k==='comment'){const id=form.dataset.id,body=(S.ui.cm[id]||'').trim();if(!body){DB.busy=false;render();return}
+   const{data,error}=await sb.from('candidate_comments').insert({candidate_id:id,body}).select().single();if(error)throw error;if(!DB.comments.some(x=>x.id===data.id))DB.comments.push(data);S.ui.cm[id]=''}
+  else if(k==='useCand'){const d=S.ui.udlg,c=DB.cands.find(x=>x.id===d.cid),s=S.scns.find(x=>x.id===d.scn);if(!c||!s||!canEdit(s)){DB.busy=false;render();return}
+   const m=normModel(s.model),x=candCalc(c);let cat=d.target==='new'?null:m.cats.find(k=>k.id===d.target);const isNew=!cat;
+   if(isNew){cat={id:'c'+Math.random().toString(36).slice(2,8),fa:c.title,en:c.title,qty:Math.max(1,Math.round(parseNum(d.qty)||1)),rev:0,src:'quote'};m.cats.push(cat);normModel(m)}
+   const old=cat.price;Object.assign(cat,{price:+c.price||0,cur:c.currency,trailer:+c.trailer_price||0,ship:+c.ship||0,duty:+c.duty||0,reg:+c.reg||0,cond:(x.age>0||(+c.km||0)>5000)?'used':'new',age:x.age||0,src:'quote',_by:S.user,_at:Date.now()});
+   if(x.remYears!=null)cat.life=Math.max(1,Math.round(x.remYears*10)/10);
+   s.updated=Date.now();S.cur=s.id;markDirty(s.id);addLog(isNew?{t:'add',scn:s.id,name:c.title}:{t:'edit',scn:s.id,path:`cats#${cat.id}.price`,o:old,n:cat.price});
+   S.ui.open=S.ui.open||{};S.ui.open[cat.id]=true;S.ui.udlg=null;DB.busy=false;location.hash='#assumptions';toast(T('mk_applied',c.title,L(s.name)),1);return}
   else if(k==='newScn'){const d=S.ui.dlg,name=(d.name||'').trim(),e1=nameErr(name);if(e1){d.err=e1;DB.busy=false;render();return}
    const src=d.start==='copy'&&!d.first?S.scns.find(s=>s.id===d.src):null;await flush();
    const{data,error}=await sb.from('scenarios').insert({project_id:DB.project.id,name,notes:(d.notes||'').trim(),visibility:d.first?(isAdmin()?'official':'team'):(d.vis||'private'),model:src?clone(src.model):blankModel()}).select().single();
@@ -1478,15 +1618,17 @@ async function boot(){
   else if(el.dataset.ctl){const c=el.dataset.ctl;
    if(c==='scn'){await flush();S.cur=el.value}
    else if(c==='rename'){const s=S.scns.find(x=>x.id===el.dataset.id);if(s&&s.owner===S.user){const o=L(s.name),nn=el.value.trim()||o;if(nn!==o&&await updateScn(s.id,{name:nn})){s.name=nn;s.updated=Date.now();addLog({t:'edit',scn:s.id,o,n:nn})}}}
+   else if(c==='cstatus'){const{error}=await sb.from('truck_candidates').update({status:el.value}).eq('id',el.dataset.id);if(error)toast(errMsg(error));else{const x=DB.cands.find(z=>z.id===el.dataset.id);if(x)x.status=el.value}}
+   else if(c==='cchk'){const x=DB.cands.find(z=>z.id===el.dataset.id);if(x){const ck=Object.assign({},x.checklist||{},{[el.dataset.k]:el.checked});const{error}=await sb.from('truck_candidates').update({checklist:ck}).eq('id',x.id);if(error)toast(errMsg(error));else x.checklist=ck}}
    else if(c==='notes'){const s=S.scns.find(x=>x.id===el.dataset.id);const nv=el.value.trim();if(s&&nv!==L(s.notes)&&await updateScn(s.id,{notes:nv})){s.notes=nv;toast(T('nm_notesSaved'),1)}}
    else if(c==='vis'){const s=S.scns.find(x=>x.id===el.dataset.id);if(s&&s.owner===S.user&&await updateScn(s.id,{visibility:el.value})){s.vis=el.value;s.updated=Date.now()}}
    else if(c==='mrole'){const{error}=await sb.from('project_members').update({role:el.value}).eq('project_id',DB.project.id).eq('user_id',el.dataset.id);if(error)toast(error.message);else addLog({t:'member',name:uLabel(usr(el.dataset.id).email)+': '+el.value});await reloadMembers()}
    render();save()}
  });
- document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.cat){S.ui.open=S.ui.open||{};S.ui.open[d.dataset.cat]=d.open}},true);
+ document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.cat){S.ui.open=S.ui.open||{};S.ui.open[d.dataset.cat]=d.open}if(d&&d.dataset&&d.dataset.cand){S.ui.cOpen[d.dataset.cand]=d.open}},true);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;onAct(b.dataset.act,b)});
  document.addEventListener('submit',e=>{const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();onSubmit(f,e.submitter)});
- document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(S.ui.dlg||S.ui.ren)){S.ui.dlg=null;S.ui.ren=null;render()}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(S.ui.dlg||S.ui.ren||S.ui.cdlg||S.ui.udlg)){S.ui.dlg=null;S.ui.ren=null;S.ui.cdlg=null;S.ui.udlg=null;render()}});
  let wasN=narrow();window.addEventListener('resize',()=>{const n=narrow();if(n!==wasN){wasN=n;render()}});
  window.addEventListener('hashchange',()=>{S.ui.sheet=false;render();const el=location.hash==='#drivers-sec'&&document.getElementById('drivers-sec');if(el)el.scrollIntoView();else window.scrollTo(0,0)});
  window.addEventListener('beforeunload',e=>{if(DB.dirty.size){flush();e.preventDefault();e.returnValue=''}});
