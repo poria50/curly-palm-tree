@@ -158,7 +158,7 @@ h2{font-size:16px;margin:0 0 14px;font-weight:650}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px}
 .hb{display:flex;flex-direction:column;gap:9px}
 .hb-row{display:grid;grid-template-columns:minmax(110px,1.1fr) 2fr auto;gap:12px;align-items:center;font-size:13px}
-.hb-l{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb-l{color:var(--ink-2);line-height:1.35}
 .hb-track{height:10px;background:var(--surface-2);border-radius:6px;overflow:hidden}
 .hb-bar{height:100%;border-radius:6px}
 .hb-v{font-weight:600;min-width:72px;text-align:end}
@@ -273,15 +273,23 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
 .pill.act{background:var(--c2);color:#fff;border-color:transparent}
 .drv-out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
 .drv-out div{background:var(--surface-2);border-radius:11px;padding:10px 12px}.drv-out span{display:block;font-size:12px;color:var(--ink-3)}.drv-out b{font-size:18px}
+.seg{flex-wrap:wrap}
+.seg.lang{flex-wrap:nowrap;flex:none}.seg.lang button{min-height:0!important}
+.rk>*,.scn>*{min-width:0}
+.rgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ledger.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.swipe{display:none;font-size:12px;color:var(--ink-3);margin:-6px 0 8px}
+.tbl.sticky th:first-child,.tbl.sticky td:first-child{position:sticky;inset-inline-start:0;background:var(--surface);z-index:1}
+.av-btn{border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
 .hero-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
 .hwarn{display:flex;flex-direction:column;gap:6px;margin-top:14px;max-width:78ch}
 .hw{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--warn);background:var(--warn-soft);border-radius:9px;padding:6px 10px}
 .hw.bad{color:var(--neg);background:var(--neg-soft)}.hw.ok{color:var(--pos);background:var(--pos-soft)}
 .hw svg.i{width:16px;height:16px;margin-top:2px}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;min-width:0}
 .kpi .k{font-size:13px;color:var(--ink-2)}
-.kpi .v{font-size:28px;font-weight:700;line-height:1.25;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v{font-size:clamp(20px,2.1vw,28px);font-weight:700;line-height:1.25;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kpi .s{font-size:12.5px;color:var(--ink-3);margin-top:4px}
 .groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}
 .group{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
@@ -308,13 +316,7 @@ h3.sub{font-size:13.5px;margin:18px 0 10px;color:var(--ink-2);font-weight:650}
 textarea.in{min-height:56px;resize:vertical;text-align:start;font:inherit}
 @media (max-width:1180px){.ledger{grid-template-columns:repeat(3,minmax(0,1fr))}.ledger .cell:nth-child(4n){border-inline-end:1px solid var(--line-2)}.ledger .cell:nth-child(3n){border-inline-end:0}}
 @media (max-width:960px){
-  .app{grid-template-columns:1fr}
-  .side{display:none}
-  .top{padding:9px 14px;gap:9px}
-  .brand-m{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--teal);color:#fff;flex:none}
-  .scn-pick .lbl,.mode,.theme-btn,.me .who,.top .sync{display:none}
-  .sel{max-width:46vw}
-  .main{padding:18px 14px calc(92px + env(safe-area-inset-bottom,0px))}
+  .main{padding:20px 18px 48px}
   .grid2,.grid3,.trip{grid-template-columns:1fr}
   .trip .res{position:static}
   .hero{padding:18px 16px 6px}
@@ -331,14 +333,60 @@ textarea.in{min-height:56px;resize:vertical;text-align:start;font:inherit}
   .kpi{padding:13px 14px}.kpi .v{font-size:21px;white-space:normal}
   .kpi .m small{display:none}
   .drv-out{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mini{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hb-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";row-gap:5px}
+  .hb-l{grid-area:l;white-space:normal}.hb-track{grid-area:t}.hb-v{grid-area:v}
+}
+/* tablet: icon sidebar */
+@media (min-width:761px) and (max-width:1180px){
+  .app{grid-template-columns:72px minmax(0,1fr)}
+  .side{padding:16px 10px}
+  .brand>div,.snav a span,.side-foot{display:none}
+  .brand{justify-content:center;padding:4px 0 18px}
+  .snav a{justify-content:center;padding:11px}
+  .mode,.me .who{display:none}
+  .top{padding:10px 18px}
+}
+/* phone */
+@media (max-width:760px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .top{padding:9px 12px;gap:8px}
+  .brand-m{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--teal);color:#fff;flex:none}
+  .scn-pick .lbl,.mode,.theme-btn,.me .who{display:none}
+  .top .sync{display:inline-block;font-size:0;width:9px;height:9px;border-radius:50%;background:transparent;flex:none}
+  .top .sync.saving{background:var(--warn)}.top .sync.saved{background:var(--pos)}.top .sync.error{background:var(--neg)}
+  .sel{max-width:44vw}
+  .main{padding:18px 12px calc(92px + env(safe-area-inset-bottom,0px))}
   .modal{top:auto;bottom:0;left:0;transform:none;width:100%;border-radius:18px 18px 0 0;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
   .bnav{display:flex;position:fixed;bottom:0;inset-inline:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px env(safe-area-inset-bottom,0px)}
   .bnav a,.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px 8px;text-decoration:none;font-size:11px;color:var(--ink-3);border:0;background:transparent;cursor:pointer}
   .bnav .on{color:var(--teal)}
   .bnav svg.i{width:22px;height:22px}
   .sheet-wrap{display:block}
-  .mini{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hb-row{grid-template-columns:minmax(90px,1fr) 1.3fr auto}
+  .in{min-width:0}
+  .ledger.three{grid-template-columns:1fr}.ledger.three .cell{border-inline-end:0!important}
+  .swipe{display:block}
+  /* stacked tables */
+  table.rtable thead{display:none}
+  table.rtable,table.rtable tbody{display:block}
+  table.rtable tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--surface)}
+  table.rtable td{display:flex;flex-direction:column;gap:4px;padding:0;border:0!important;text-align:start!important;white-space:normal;min-width:0}
+  table.rtable td>*{align-self:flex-start}table.rtable td>.in,table.rtable td>.sel{align-self:stretch}
+  table.rtable td::before{content:attr(data-label);font-size:11.5px;color:var(--ink-3)}
+  table.rtable td[data-label=""]::before{display:none}
+  table.rtable td:first-child{grid-column:1/-1}
+  table.rtable td:empty{display:none}
+  table.rtable tr.tot{background:var(--surface-2)}
+  table.rtable tr.tot td:first-child{font-size:13px}
+  .tscroll.rt{overflow:visible;margin:0;padding:0}
+}
+@media (max-width:960px),(pointer:coarse){
+  .btn{min-height:40px}.btn.ghost{min-width:40px;justify-content:center}
+  .seg button{min-height:38px}
+  .src{padding:6px 11px;min-height:30px}
+  .chip{min-height:36px}
+  .check input{width:22px;height:22px}
 }
 @media (max-width:420px){.lang button{padding:5px 8px}}
 @media (prefers-reduced-motion:no-preference){.hero .road path.ln{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.1s ease-out .1s forwards}@keyframes draw{to{stroke-dashoffset:0}}}
@@ -457,7 +505,7 @@ st_open:['باز','Open'],st_mitig:['در حال کاهش','Mitigating'],st_clos
 sh_rev:['نرخ کرایه، همه انواع','Freight rates, all'],sh_revCat:['درآمد یک نوع حمل','Revenue of one category'],sh_util:['بهره‌وری ناوگان','Fleet utilization'],sh_diesel:['قیمت گازوئیل','Diesel price'],sh_drivers:['هزینه رانندگان','Driver costs'],sh_opex:['همه هزینه‌های عملیاتی','All operating costs'],sh_capex:['قیمت خرید کامیون','Truck purchase price'],
 sh_pct:['تغییر ٪','Change %'],
 p1:['بسیار کم (۱۰٪)','Very low (10%)'],
-ton:['تن','t'],
+ton:['تن','t'],swipe:['برای دیدن سال‌های بیشتر، جدول را به چپ و راست بکشید.','Swipe the table sideways to see more years.'],swipe2:['برای دیدن ستون‌های بیشتر، جدول را به چپ و راست بکشید.','Swipe the table sideways to see more columns.'],
 ad_title:['کاربران و دسترسی','Users and access'],ad_sub:['کاربر بسازید، رمز عبور و نام را تغییر دهید و نقش‌ها را تعیین کنید. فقط مالک و مدیر این بخش را می‌بینند.','Create users, change passwords and names, and set roles. Only owners and admins see this section.'],
 ad_new:['کاربر جدید','New user'],ad_user:['نام کاربری','Username'],ad_name:['نام نمایشی','Display name'],ad_pw:['رمز عبور','Password'],ad_role:['نقش','Role'],ad_create:['ساخت کاربر','Create user'],
 ad_created:[(u,p)=>`کاربر «${u}» ساخته شد. رمز عبور: ${p}`,(u,p)=>`User “${u}” created. Password: ${p}`],
@@ -975,16 +1023,16 @@ function vAssumptions(){
  const invRows=m.inv.map(i=>`<tr><td>${txtIn(`inv#${i.id}.${S.lang}`)}</td><td>${selIn(`inv#${i.id}.kind`,[['truck',T('kind_truck')],['fixed',T('kind_fixed')]])}</td><td>${numIn(`inv#${i.id}.v`)}</td><td class="n">${fmt(i.kind==='truck'?i.v*q:i.v)}</td><td>${srcChip('inv#'+i.id)}</td><td>${edited('inv#'+i.id)}</td><td>${ce&&!['import','wc'].includes(i.id)?`<button class="btn ghost" data-act="del" data-arg="inv#${i.id}" title="${T('remove')}">${ic('trash')}</button>`:''}</td></tr>`).join('');
  const F=(k,d=1)=>field(T('f_'+k),numIn('fin.'+k,d),m.meta&&m.meta['fin.'+k]?srcChip('fin.'+k):'');
  return head(T('a_title'),T('a_sub'))+`<div class="stack">
- <section class="panel"><h2>${T('sec_fleet')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_category')}</th><th>${T('col_qty')}</th><th>${T('col_cond')}</th><th class="n">${T('col_landed')}</th><th>${T('col_revTruck')}</th><th class="n">${T('col_revTotal')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${catRows}
+ <section class="panel"><h2>${T('sec_fleet')}</h2><div class="tscroll rt"><table class="tbl rtable"><thead><tr><th>${T('col_category')}</th><th>${T('col_qty')}</th><th>${T('col_cond')}</th><th class="n">${T('col_landed')}</th><th>${T('col_revTruck')}</th><th class="n">${T('col_revTotal')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${catRows}
  <tr class="tot"><td>${T('total')}</td><td class="n">${fmt(q)}</td><td></td><td class="n">${fmt(r.invLines[0].v)}</td><td></td><td class="n">${fmt(r.revM)}</td><td colspan="3"></td></tr></tbody></table></div>
  ${ce?`<div class="row" style="margin-top:12px"><button class="btn" data-act="addCat">${ic('plus')}${T('addCat')}</button></div>`:''}</section>
- <section class="panel"><h2>${T('sec_opex')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_line')}</th><th>${T('col_perTruck')}</th><th>${T('col_type')}</th><th class="n">${T('col_monthly')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${opRows}
+ <section class="panel"><h2>${T('sec_opex')}</h2><div class="tscroll rt"><table class="tbl rtable"><thead><tr><th>${T('col_line')}</th><th>${T('col_perTruck')}</th><th>${T('col_type')}</th><th class="n">${T('col_monthly')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>${opRows}
  <tr><td class="lbl">${T('driversCost')}<div class="small muted" style="margin-top:4px"><a href="#drivers-sec" style="color:var(--teal)">${T('drvRow',fmt(r.drivers))}</a></div></td><td>${numIn('drv.cost')}<div class="small muted" style="margin-top:4px">${T('drvCost')}</div></td><td><span class="pill">${T('t_fix')}</span></td><td class="n">${fmt(r.drivers*m.drv.cost)}</td><td>${srcChip('drv')}</td><td>${edited('drv')}</td><td></td></tr>
  ${fxRows}<tr class="tot"><td>${T('total')}</td><td></td><td></td><td class="n">${fmt(r.opexM)}</td><td colspan="3"></td></tr></tbody></table></div>
  <p class="note">${T('dieselNote',fmt(m.fin.diesel,3))}</p>${ce?`<div class="row" style="margin-top:6px"><button class="btn" data-act="addCost">${ic('plus')}${T('addCost')}</button></div>`:''}</section>
  ${vehPanel()}
  ${drvPanel()}
- <section class="panel"><h2>${T('sec_inv')}</h2><div class="tscroll"><table class="tbl"><thead><tr><th>${T('col_line')}</th><th>${T('col_type')}</th><th>${T('col_value')}</th><th class="n">${T('col_amount')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>
+ <section class="panel"><h2>${T('sec_inv')}</h2><div class="tscroll rt"><table class="tbl rtable"><thead><tr><th>${T('col_line')}</th><th>${T('col_type')}</th><th>${T('col_value')}</th><th class="n">${T('col_amount')}</th><th>${T('col_source')}</th><th>${T('col_edited')}</th><th></th></tr></thead><tbody>
  <tr class="sub"><td class="lbl">${T('invTrucks')}</td><td><span class="pill">${T('kind_calc')}</span></td><td></td><td class="n">${fmt(r.invLines[0].v)}</td><td></td><td></td><td></td></tr>${invRows}
  <tr class="tot"><td>${T('total')}</td><td></td><td></td><td class="n">${fmt(r.invest)}</td><td colspan="3"></td></tr></tbody></table></div>
  ${ce?`<div class="row" style="margin-top:12px"><button class="btn" data-act="addInv">${ic('plus')}${T('addInv')}</button></div>`:''}</section>
@@ -1049,11 +1097,11 @@ function vForecast(){
  <section class="ledger">${metric(T('k_npv'),`<span class="${cls(r.npv)}">${money(r.npv)}</span>`,T('k_disc',pct(f.disc/100,0)))}${metric(T('k_irr'),pct(r.irr))}${metric(T('k_payback'),yrs(r.payback),`${T('k_dpay')}: ${yrs(r.dpayback)}`)}${metric(T('m_ebitdaM'),pct(r.ebitdaMargin),`${T('m_netM')}: ${pct(r.netMargin)}`)}
  ${metric(T('m_roic'),pct(r.roic))}${metric(T('m_coc'),pct(r.coc))}${metric(T('m_be'),money(r.beRev),`${T('m_beU')}: ${pct(r.beU,0)}`)}${metric(T('m_beTrips'),bt==null?'—':fmt(Math.ceil(bt)),T('m_beTripsSub'))}</section>
  <div class="stack">
- <section class="panel"><h2>${T('is_title')}</h2><div class="tscroll"><table class="tbl"><thead>${th}</thead><tbody>
+ <section class="panel"><h2>${T('is_title')}</h2><p class="swipe">${T('swipe')}</p><div class="tscroll"><table class="tbl sticky"><thead>${th}</thead><tbody>
   ${tr('row_rev',ys.map(y=>y.rev),'key')}${tr('row_vc',neg(ys.map(y=>y.vc)))}${tr('row_gross',ys.map(y=>y.gross),'sub')}${tr('row_fc',neg(ys.map(y=>y.fc)))}
   ${tr('row_ebitda',ys.map(y=>y.ebitda),'key')}${tr('row_dep',neg(ys.map(y=>y.dep)))}${tr('row_ebit',ys.map(y=>y.ebit),'sub')}${tr('row_tax',neg(ys.map(y=>y.tax)))}${tr('row_net',ys.map(y=>y.net),'tot')}
  </tbody></table></div></section>
- <section class="panel"><h2>${T('cf_title')}</h2><div class="tscroll"><table class="tbl"><thead>${th}</thead><tbody>
+ <section class="panel"><h2>${T('cf_title')}</h2><p class="swipe">${T('swipe')}</p><div class="tscroll"><table class="tbl sticky"><thead>${th}</thead><tbody>
   ${tr('row_init',[0,0,0,0,0],'',`<span class="neg">${fmt(-r.invest)}</span>`)}${tr('row_ocf',ys.map(y=>y.ocf))}${tr('row_capex',neg(ys.map(y=>y.capex)))}${tr('row_term',tvRow)}
   ${tr('row_fcf',fcfT,'key',`<span class="neg">${fmt(-r.invest)}</span>`)}${tr('row_cum',cumT,'tot',`<span class="neg">${fmt(-r.invest)}</span>`)}
  </tbody></table></div></section>
@@ -1110,7 +1158,7 @@ function vCompare(){
  const rows=MET.map(([k,g,t,b])=>{const vals=rs.map(g);let best=null;if(b&&vals.length>1){const ok=vals.map((v,i)=>[v,i]).filter(([v])=>v!=null&&isFinite(v));if(ok.length){best=ok.reduce((a,c)=>(b==='hi'?c[0]>a[0]:c[0]<a[0])?c:a)[1]}}
   return `<tr><td class="lbl">${T(k)}</td>${vals.map((v,i)=>`<td class="n ${i===best?'best':''} ${t==='m'?cls(v):''}">${t==='p'?pct(v):t==='y'?yrs(v):fmt(v)}</td>`).join('')}</tr>`}).join('');
  return head(T('cp_title'),T('cp_sub'))+`<div class="chips">${chips}</div>
- <section class="panel"><div class="tscroll"><table class="tbl"><thead><tr><th>${T('cp_metric')}</th>${sel.map(s=>`<th class="n">${esc(L(s.name))}<div class="small muted">${esc(uname(s.owner))}</div></th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div></section>
+ <section class="panel"><p class="swipe">${T('swipe2')}</p><div class="tscroll"><table class="tbl sticky"><thead><tr><th>${T('cp_metric')}</th>${sel.map(s=>`<th class="n">${esc(L(s.name))}<div class="small muted">${esc(uname(s.owner))}</div></th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div></section>
  <section class="panel" style="margin-top:18px"><h2>${T('cp_chart')}</h2>${barChart(sel.map(s=>L(s.name)),[{name:'NPV',color:'var(--c1)',values:rs.map(r=>r.npv)},{name:T('cp_cum5'),color:'var(--c2)',values:rs.map(r=>r.cum5)}],260)}</section>`;
 }
 function vInvestors(){
@@ -1118,8 +1166,8 @@ function vInvestors(){
  const rows=m.investors.map(i=>{const sh=com?i.amt/com:0;return `<tr><td><input class="in txt" data-bind="investors#${i.id}.name" data-text="1" value="${esc(L(i.name))}" ${dis()}></td><td>${numIn(`investors#${i.id}.amt`)}</td><td class="n">${pct(sh)}</td><td class="n">${fmt(sh*r.cum5+sh*r.invest)}</td><td class="n">${fmt(sh*dist)}</td><td class="n">${pct(i.amt?sh*dist/5/i.amt:null)}</td><td>${srcChip('investors#'+i.id)}</td><td>${ce&&m.investors.length>1?`<button class="btn ghost" data-act="del" data-arg="investors#${i.id}">${ic('trash')}</button>`:''}</td></tr>`}).join('');
  const w=r.invest?Math.min(100,com/r.invest*100):0;
  return head(T('iv_title'),T('iv_sub'))+`
- <section class="ledger" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="cell"><div class="k"><span>${T('iv_req')}</span></div><div class="v">${money(r.invest)}</div></div><div class="cell"><div class="k"><span>${T('iv_com')}</span></div><div class="v">${money(com)}</div><div class="bar-mini"><i style="width:${w}%"></i></div></div><div class="cell" style="border-inline-end:0"><div class="k"><span>${gap>0.5?T('iv_gap'):T('iv_sur')}</span></div><div class="v ${gap>0.5?'neg':'pos'}">${money(Math.abs(gap))}</div></div></section>
- <section class="panel"><div class="tscroll"><table class="tbl"><thead><tr><th>${T('iv_name')}</th><th>${T('iv_amt')}</th><th class="n">${T('iv_share')}</th><th class="n">${T('iv_fcf')}</th><th class="n">${T('iv_div')}</th><th class="n">${T('iv_yield')}</th><th>${T('col_source')}</th><th></th></tr></thead><tbody>${rows}
+ <section class="ledger three"><div class="cell"><div class="k"><span>${T('iv_req')}</span></div><div class="v">${money(r.invest)}</div></div><div class="cell"><div class="k"><span>${T('iv_com')}</span></div><div class="v">${money(com)}</div><div class="bar-mini"><i style="width:${w}%"></i></div></div><div class="cell" style="border-inline-end:0"><div class="k"><span>${gap>0.5?T('iv_gap'):T('iv_sur')}</span></div><div class="v ${gap>0.5?'neg':'pos'}">${money(Math.abs(gap))}</div></div></section>
+ <section class="panel"><div class="tscroll rt"><table class="tbl rtable"><thead><tr><th>${T('iv_name')}</th><th>${T('iv_amt')}</th><th class="n">${T('iv_share')}</th><th class="n">${T('iv_fcf')}</th><th class="n">${T('iv_div')}</th><th class="n">${T('iv_yield')}</th><th>${T('col_source')}</th><th></th></tr></thead><tbody>${rows}
  <tr class="tot"><td>${T('total')}</td><td class="n">${fmt(com)}</td><td class="n">${pct(com?1:0)}</td><td class="n">${fmt(r.cum5+r.invest)}</td><td class="n">${fmt(dist)}</td><td></td><td colspan="2"></td></tr></tbody></table></div>
  <div class="row" style="margin-top:14px;align-items:flex-end">${ce?`<button class="btn" data-act="addInvestor">${ic('plus')}${T('iv_add')}</button>`:''}<span class="spacer"></span><div style="width:260px">${field(T('f_dist'),numIn('fin.dist',0))}</div></div>
  <p class="note">${T('iv_note')}</p></section>`;
@@ -1312,7 +1360,7 @@ function vLog(){const m=M(),ce=canCreate(),u=S.ui.log,lf=S.ui.logf;
  return head(T('lg_title'),T('lg_sub'))+form+`
  <div class="row" style="margin-bottom:12px"><label class="field" style="width:200px"><span>${T('lg_month')}</span><input class="in" type="month" data-ui="logf.month" data-live="1" value="${month}" dir="ltr"></label></div>
  <section class="ledger">${cell('lg_rounds',fmt(rows.length),`${T('lg_vsPlan')}: ${fmt(sum(plan,o=>o.rm))}`)}${cell('lg_km',fmt(km),`${T('lg_avgKm')}: ${rows.length?fmt(km/rows.length,1):'—'}`)}${cell('lg_rev',money(rev),`${T('lg_vsPlan')}: ${fmt(sum(plan,o=>o.revM))}`)}${cell('lg_cont',`<span class="${cls(rev-cost)}">${money(rev-cost)}</span>`,`${T('lg_cost')}: ${fmt(cost)}`)}</section>
- <section class="panel">${rows.length?`<div class="tscroll"><table class="tbl"><thead><tr><th>${T('lg_time')}</th><th>${T('lg_truck')}</th><th>${T('lg_driver')}</th><th>${T('lg_route')}</th><th class="n">${T('lg_odo')}</th><th class="n">${T('lg_km')}</th><th class="n">${T('lg_tons')}</th><th class="n">${T('lg_rev')}</th><th class="n">${T('lg_cost')}</th><th class="n">${T('lg_cont')}</th><th>${T('lg_by')}</th><th></th></tr></thead><tbody>${trs}</tbody></table></div>`:`<span class="muted">${T('lg_empty')}</span>`}</section>`;
+ <section class="panel">${rows.length?`<div class="tscroll rt"><table class="tbl rtable"><thead><tr><th>${T('lg_time')}</th><th>${T('lg_truck')}</th><th>${T('lg_driver')}</th><th>${T('lg_route')}</th><th class="n">${T('lg_odo')}</th><th class="n">${T('lg_km')}</th><th class="n">${T('lg_tons')}</th><th class="n">${T('lg_rev')}</th><th class="n">${T('lg_cost')}</th><th class="n">${T('lg_cont')}</th><th>${T('lg_by')}</th><th></th></tr></thead><tbody>${trs}</tbody></table></div>`:`<span class="muted">${T('lg_empty')}</span>`}</section>`;
 }
 function prefillTruck(){const u=S.ui.log,k=(u.truck||'').trim().toLowerCase();if(!k)return;const last=DB.logs.filter(l=>(l.truck||'').trim().toLowerCase()===k).sort((a,b)=>a.started_at<b.started_at?1:-1)[0];
  if(last){u.o1=String(+last.odo_end);if(!u.driver)u.driver=last.driver||'';if(!u.route&&last.route_id&&M().routes.some(r=>r.id===last.route_id)){u.route=last.route_id;prefillRoute()}}}
@@ -1354,7 +1402,7 @@ function vMarket(){const mk=S.ui.mk,ce=canCreate();
  const sel=mk.cmp.map(id=>DB.cands.find(c=>c.id===id)).filter(Boolean);let cmp='';
  if(sel.length>=2){const xs=sel.map(candCalc);
   const rows=[['mm_price',(c,x)=>`${fmt(c.price)} ${esc(c.currency)}`,null],['mm_landed',(c,x)=>x.landed,'lo'],['mf_year',(c,x)=>c.year,'hi'],['mf_km',(c,x)=>c.km,'lo'],['mm_remKm',(c,x)=>x.remKm,'hi'],['mm_per100k',(c,x)=>x.per100k,'lo'],['mm_remYears',(c,x)=>x.remYears,'hi'],['mf_hp',(c,x)=>c.hp,'hi'],['mf_axle',(c,x)=>esc(c.axle||'—'),null],['mf_euro',(c,x)=>esc(c.euro||'—'),null],['mf_gearbox',(c,x)=>esc(c.gearbox||'—'),null],['mm_check',(c,x)=>x.ck,'hi'],['mm_votes',(c,x)=>x.up-x.down,'hi'],['mf_country',(c,x)=>esc(c.country||'—'),null]];
-  cmp=`<section class="panel" style="margin-bottom:18px"><div class="row" style="margin-bottom:10px"><h2 style="margin:0">${T('mk_cmpTitle')}</h2><span class="spacer"></span><button class="btn ghost" data-act="cmpClear">${T('mk_cmpClear')}</button></div><div class="tscroll"><table class="tbl"><thead><tr><th></th>${sel.map(c=>`<th class="n">${esc(c.title)}</th>`).join('')}</tr></thead><tbody>
+  cmp=`<section class="panel" style="margin-bottom:18px"><div class="row" style="margin-bottom:10px"><h2 style="margin:0">${T('mk_cmpTitle')}</h2><span class="spacer"></span><button class="btn ghost" data-act="cmpClear">${T('mk_cmpClear')}</button></div><p class="swipe">${T('swipe2')}</p><div class="tscroll"><table class="tbl sticky"><thead><tr><th></th>${sel.map(c=>`<th class="n">${esc(c.title)}</th>`).join('')}</tr></thead><tbody>
   ${rows.map(([k,g,b])=>{const vals=sel.map((c,i)=>g(c,xs[i]));let best=-1;if(b){const ok=vals.map((v,i)=>[v,i]).filter(([v])=>typeof v==='number'&&isFinite(v));if(ok.length>1)best=ok.reduce((a,c2)=>(b==='hi'?c2[0]>a[0]:c2[0]<a[0])?c2:a)[1]}
    return `<tr><td class="lbl">${T(k)}</td>${vals.map((v,i)=>`<td class="n ${i===best?'best':''}">${typeof v==='number'?(k==='mm_remYears'?fmt(v,1):k==='mf_year'?String(fmt(v)).replace(/٬|,/g,''):fmt(v)):v==null?'—':v}</td>`).join('')}</tr>`}).join('')}
   </tbody></table></div></section>`}
@@ -1405,7 +1453,7 @@ function shell(){
  const moreOn=!bn.includes(v);
  return `<div class="app">
  <aside class="side"><div class="brand"><span class="mk">${ic('truck',22)}</span><div><b>${T('appShort')}</b><span>${T('phase')}</span></div></div>
-  <nav class="snav">${NAV.map(n=>`<a href="#${n}" class="${v===n?'on':''}">${ic(n)}<span>${T('nav_'+n)}</span></a>`).join('')}</nav>
+  <nav class="snav">${NAV.map(n=>`<a href="#${n}" title="${esc(T('nav_'+n))}" class="${v===n?'on':''}">${ic(n)}<span>${T('nav_'+n)}</span></a>`).join('')}</nav>
   <div class="side-foot">${esc(DB.project?DB.project.name:'')}<br>${T('appName')}</div></aside>
  <div class="mainwrap">
   <header class="top">
@@ -1416,7 +1464,7 @@ function shell(){
     <div class="seg lang"><button data-act="lang" data-arg="fa" class="${S.lang==='fa'?'on':''}" lang="fa">فارسی</button><button data-act="lang" data-arg="en" class="${S.lang==='en'?'on':''}" lang="en">EN</button></div>
     <span id="sync" class="sync ${DB.status}">${T('sync_'+DB.status)}</span>
     <button class="icon-btn theme-btn" data-act="theme" title="${esc(T('theme'))}" aria-label="${esc(T('theme'))}">${ic('moon')}</button>
-    <div class="me">${avatar(u.id)}<div class="who"><b>${esc(u.name)}</b><span>${T('role_'+u.role)}</span></div><button class="icon-btn theme-btn" data-act="signOut" title="${esc(T('signOut'))}" aria-label="${esc(T('signOut'))}">${ic('signout')}</button></div>
+    <div class="me"><button class="av-btn" data-act="sheetM" aria-label="${esc(T('more'))}">${avatar(u.id)}</button><div class="who"><b>${esc(u.name)}</b><span>${T('role_'+u.role)}</span></div><button class="icon-btn theme-btn" data-act="signOut" title="${esc(T('signOut'))}" aria-label="${esc(T('signOut'))}">${ic('signout')}</button></div>
    </div>
   </header>
   ${dlgHtml()}${cdlgHtml()}${udlgHtml()}<main class="main">${DB.toast?`<div class="banner ${DB.toastOk?'info':''}">${ic(DB.toastOk?'check':'warn')}<span>${esc(DB.toast)}</span></div>`:''}${lockBanner()}${VIEWS[v]()}</main>
@@ -1439,6 +1487,7 @@ function render(){
  else if(!cur())html=vEmpty();
  else{R=calc(M());TR=calcTrip(M(),R);html=shell()}
  document.getElementById('root').innerHTML=html;
+ document.querySelectorAll('table.rtable').forEach(t=>{const hs=[...t.querySelectorAll('thead th')].map(x=>x.textContent.trim());t.querySelectorAll('tbody tr').forEach(tr=>{let i=0;[...tr.children].forEach(td=>{if(!td.hasAttribute('data-label'))td.setAttribute('data-label',hs[i]||'');i+=td.colSpan||1})})});
  if(S.ui.cdlg&&S.ui.cdlg.focus){S.ui.cdlg.focus=false;keep=null;const el=document.querySelector('[data-ui="cdlg.title"]');if(el)el.focus()}
  if(S.ui.dlg&&S.ui.dlg.focus){S.ui.dlg.focus=false;keep=null;const el=document.querySelector('[data-ui="dlg.name"]');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length)}}
  if(keep){const el=document.querySelector(keep.b?`[data-bind="${keep.b}"]`:`[data-ui="${keep.u}"]`);if(el){el.value=keep.v;el.focus();try{el.setSelectionRange(keep.s,keep.e)}catch(e){}}}
@@ -1509,6 +1558,7 @@ async function onAct(a,b){
   case 'lang':S.lang=arg;break;
   case 'theme':{const dark=S.theme==='dark'||(S.theme==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);S.theme=dark?'light':'dark';break}
   case 'sheet':S.ui.sheet=true;break;
+  case 'sheetM':if(innerWidth>760)return;S.ui.sheet=true;break;
   case 'sheetClose':S.ui.sheet=false;break;
   case 'authMode':S.ui.authMode=S.ui.authMode==='up'?'in':'up';DB.authMsg='';break;
   case 'signOut':await flush();if(DB.ch)sb.removeChannel(DB.ch);DB.ch=null;S.ui.sheet=false;await sb.auth.signOut();return;
