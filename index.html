@@ -646,7 +646,7 @@ function pct(v,d=1,sign){if(v==null||!isFinite(v))return '—';return new Intl.N
 function yrs(v){return v==null?T('notReached'):`${fmt(v,1)} ${T('years')}`}
 function yr(y){return new Intl.NumberFormat(loc(),{useGrouping:false}).format(y)}
 function compact(v){return new Intl.NumberFormat(loc(),{notation:'compact',maximumFractionDigits:1}).format(v)}
-function dt(ts,short){return new Intl.DateTimeFormat(S.lang==='fa'?'fa-IR-u-ca-persian':'en-GB',short?{day:'numeric',month:'short'}:{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(ts))}
+function dt(ts,short){return new Intl.DateTimeFormat(S.lang==='fa'?'fa-IR-u-ca-gregory':'en-GB',short?{day:'numeric',month:'short'}:{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(ts))}
 const cls=v=>v<0?'neg':'';
 function fmtIn(v,d){if(v==null||v==='')return '';const n=Number(v);if(!isFinite(n))return '';return String(Number(n.toFixed(d)))}
 function parseNum(s){s=String(s).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)).replace(/[٠-٩]/g,c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/٫/g,'.').replace(/[,٬\s]/g,'');if(s===''||s==='-'||s==='.')return 0;const n=parseFloat(s);return isFinite(n)?n:undefined}
@@ -1229,7 +1229,7 @@ function openDlg(o){S.ui.dlg=Object.assign({name:'',notes:'',vis:'private',start
 function nameSuggestions(d){const me=uname(S.user),out=[];const src=d.start==='copy'?S.scns.find(s=>s.id===d.src):null;const m=src?src.model:null;
  if(m&&m.cats&&m.cats.length){const c=m.cats.slice().sort((a,b)=>b.qty-a.qty)[0];out.push(`${fmt(sum(m.cats,x=>+x.qty||0))} ${L(c)}`);}
  if(src)out.push(`${me}: ${L(src.name)}`.slice(0,60));
- out.push(`${me}, ${new Intl.DateTimeFormat(S.lang==='fa'?'fa-IR-u-ca-persian':'en-GB',{month:'long',year:'numeric'}).format(new Date())}`);
+ out.push(`${me}, ${new Intl.DateTimeFormat(S.lang==='fa'?'fa-IR-u-ca-gregory':'en-GB',{month:'long',year:'numeric'}).format(new Date())}`);
  return [...new Set(out)].filter(x=>!nameErr(x))}
 function dlgHtml(){const d=S.ui.dlg;if(!d)return '';const vis=visible();
  const seg=['blank','copy'].map(k=>`<button type="button" class="${d.start===k?'on':''}" data-act="dlgStart" data-arg="${k}" ${k==='copy'&&!vis.length?'disabled':''}>${T(k==='blank'?'nm_blank':'nm_copy')}</button>`).join('');
